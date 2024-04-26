@@ -13,4 +13,3 @@
 // se mandan a llamar desde el navegador  localhost:8080/products/products?limit=5, eso debe devolver solo los primeros 5 de 10.
 //llama localhost:8080/products/2 se deolvueve solo el id 2
 // mandan a llamar desde navegador localhost:8080/products/2343243 y tiene q indicar que no existe.
-
