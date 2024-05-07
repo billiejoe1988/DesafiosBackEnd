@@ -1,0 +1,167 @@
+[
+  {
+    "pid": "306d6ab0-fc7c-4a3b-99b7-e578c52bab8a",
+    "title": "Producto 1",
+    "description": "Este es el producto 1",
+    "price": 201,
+    "code": "Imagen 1",
+    "stock": "abc1",
+    "status": true,
+    "category": 26,
+    "thumbnail": null
+  },
+  {
+    "pid": "121abdff-d698-44f4-a37d-bbc67f4cfa12",
+    "title": "Producto 2",
+    "description": "Este es el producto 2",
+    "price": 202,
+    "code": "Imagen 2",
+    "stock": "abc2",
+    "status": true,
+    "category": 27,
+    "thumbnail": null
+  },
+  {
+    "pid": "64b8f96f-64e6-49db-a783-89c0b4819f75",
+    "title": "Producto 3",
+    "description": "Este es el producto 3",
+    "price": 203,
+    "code": "Imagen 3",
+    "stock": "abc3",
+    "status": true,
+    "category": 28,
+    "thumbnail": null
+  },
+  {
+    "pid": "35b826ed-d948-48aa-90d1-fb7f0da8c34c",
+    "title": "Producto 4",
+    "description": "Este es el producto 4",
+    "price": 204,
+    "code": "Imagen 4",
+    "stock": "abc4",
+    "status": true,
+    "category": 29,
+    "thumbnail": null
+  },
+  {
+    "pid": "ed5b8ec1-fb78-415f-8c9f-25290ca6ae5b",
+    "title": "Producto 5",
+    "description": "Este es el producto 5",
+    "price": 205,
+    "code": "Imagen 5",
+    "stock": "abc5",
+    "status": true,
+    "category": 30,
+    "thumbnail": null
+  },
+  {
+    "pid": "a9df9367-012c-4cf8-a22c-971991ecc01e",
+    "title": "Producto 6",
+    "description": "Este es el producto 6",
+    "price": 206,
+    "code": "Imagen 6",
+    "stock": "abc6",
+    "status": true,
+    "category": 31,
+    "thumbnail": null
+  },
+  {
+    "pid": "8830442e-b940-4345-92c0-6299b15ae7d6",
+    "title": "Producto 7",
+    "description": "Este es el producto 7",
+    "price": 207,
+    "code": "Imagen 7",
+    "stock": "abc7",
+    "status": true,
+    "category": 32,
+    "thumbnail": null
+  },
+  {
+    "pid": "a6a4053e-ba91-4039-ba57-8051f3992f1c",
+    "title": "Producto 8",
+    "description": "Este es el producto 8",
+    "price": 208,
+    "code": "Imagen 8",
+    "stock": "abc8",
+    "status": true,
+    "category": 33,
+    "thumbnail": null
+  },
+  {
+    "pid": "c5f6a045-696e-4b23-82f2-8e14e2525da9",
+    "title": "Producto 9",
+    "description": "Este es el producto 9",
+    "price": 209,
+    "code": "Imagen 9",
+    "stock": "abc9",
+    "status": true,
+    "category": 34,
+    "thumbnail": null
+  },
+  {
+    "pid": "625de69b-12d6-4e0d-b891-5a09eb81bdca",
+    "title": "Producto 10",
+    "description": "Este es el producto 10",
+    "price": 210,
+    "code": "Imagen 10",
+    "stock": "abc10",
+    "status": true,
+    "category": 35,
+    "thumbnail": null
+  },
+  {
+    "pid": "78406e42-ce9f-4d54-89c1-7d63faaf632a",
+    "title": "Producto 11",
+    "description": "Este es el producto 11",
+    "price": 211,
+    "code": "Imagen 11",
+    "stock": "abc11",
+    "status": true,
+    "category": 36,
+    "thumbnail": null
+  },
+  {
+    "pid": "e48b623d-3147-4def-889c-e16424b6730e",
+    "title": "Producto 12",
+    "description": "Este es el producto 12",
+    "price": 212,
+    "code": "Imagen 12",
+    "stock": "abc12",
+    "status": true,
+    "category": 37,
+    "thumbnail": null
+  },
+  {
+    "pid": "1658c120-ffca-46d5-9323-441388e4ac68",
+    "title": "Producto 13",
+    "description": "Este es el producto 13",
+    "price": 213,
+    "code": "Imagen 13",
+    "stock": "abc13",
+    "status": true,
+    "category": 38,
+    "thumbnail": null
+  },
+  {
+    "pid": "65aa3ff5-e7c7-464d-acf2-17fe0757dfe2",
+    "title": "Producto 14",
+    "description": "Este es el producto 14",
+    "price": 214,
+    "code": "Imagen 14",
+    "stock": "abc14",
+    "status": true,
+    "category": 39,
+    "thumbnail": null
+  },
+  {
+    "pid": "d9f9a1fb-dd1f-4926-ade9-c0bf3ab30e7c",
+    "title": "Producto 15",
+    "description": "Este es el producto 15",
+    "price": 215,
+    "code": "Imagen 15",
+    "stock": "abc15",
+    "status": true,
+    "category": 40,
+    "thumbnail": null
+  }
+]
