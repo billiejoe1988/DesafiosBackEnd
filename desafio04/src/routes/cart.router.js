@@ -1,16 +1,16 @@
-import { Router } from "express";
-import CartManager from "../manager/cart.manager.js"; 
+import { Router } from 'express';
+import CartManager from '../manager/cart.manager.js';
 
 const routerCart = Router();
-const cartManager = new CartManager("./carts.json");
+const cartManager = new CartManager('./carts.json');
 
 routerCart.get('/', async (req, res) => {
     try {
-        let limit = req.query.limit; 
+        let limit = req.query.limit;
         let carts = await cartManager.getCarts();
 
         if (limit && !isNaN(parseInt(limit))) {
-            carts = carts.slice(0, parseInt(limit)); 
+            carts = carts.slice(0, parseInt(limit));
         }
 
         res.status(200).json(carts);
@@ -26,7 +26,7 @@ routerCart.post('/:cid/product/:pid', async (req, res) => {
         let cart;
 
         const existingCart = await cartManager.getCartById(cid);
-        
+
         if (existingCart) {
             cart = await cartManager.addToCart(cid, { pid, quantity });
         } else {
@@ -45,7 +45,7 @@ routerCart.get('/:cid', async (req, res) => {
         const cart = await cartManager.getCartById(cid);
 
         if (!cart) {
-            return res.status(404).json({ msg: "Cart not found" });
+            return res.status(404).json({ msg: 'Cart not found' });
         }
 
         res.status(200).json(cart);

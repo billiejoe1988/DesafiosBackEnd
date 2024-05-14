@@ -10,7 +10,7 @@ export default class ProductManager {
         try {
             if (fs.existsSync(this.path)) {
                 const productsData = await fs.promises.readFile(this.path, 'utf8');
-                if (productsData.trim() === '') return []; 
+                if (productsData.trim() === '') return [];
                 return JSON.parse(productsData);
             } else {
                 return [];
@@ -36,7 +36,7 @@ export default class ProductManager {
             }
 
             const newProduct = {
-                pid: uuidv4(), 
+                pid: uuidv4(),
                 title,
                 description,
                 price,
@@ -44,7 +44,7 @@ export default class ProductManager {
                 code,
                 stock,
                 category,
-                status: true 
+                status: true
             };
 
             products.push(newProduct);
@@ -65,18 +65,8 @@ export default class ProductManager {
             }
             return product;
         } catch (error) {
-            console.log("Error:", error.message); 
+            console.log("Error:", error.message);
             return null;
-        }
-    }
-
-    async deleteFile(){
-        try{
-            await fs.promises.unlink(this.path);
-            console.log("archivo eliminado");
-
-        } catch (error) {
-            console.log(error)
         }
     }
 
@@ -87,18 +77,18 @@ export default class ProductManager {
             if (i === -1) {
                 throw new Error("Product not found");
             }
-            console.log(`${products[i].title} ha sido borrado`); 
-            products.splice(i, 1); 
+            console.log(`${products[i].title} ha sido borrado`);
+            products.splice(i, 1);
             await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
         } catch (error) {
             console.log(error);
         }
     }
-    
-    async modifyProduct(pid, title, description, price, code, stock, category, status, thumbnail = null) {
+
+    async modifyProduct(pid, productData) {
         try {
             const products = await this.getProducts();
-    
+
             const i = products.findIndex(product => product.pid === pid);
             if (i === -1) {
                 throw new Error("Product not found");

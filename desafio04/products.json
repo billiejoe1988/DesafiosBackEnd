@@ -163,5 +163,16 @@
     "status": true,
     "category": 40,
     "thumbnail": null
+  },
+  {
+    "pid": "e5953e96-8bb9-487d-8159-b087361fff90",
+    "title": "titulo",
+    "description": "description",
+    "price": "1",
+    "thumbnail": "foto",
+    "code": "codigo",
+    "stock": "123",
+    "category": "category",
+    "status": true
   }
 ]
