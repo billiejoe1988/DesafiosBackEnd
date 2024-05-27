@@ -1,1 +1,1 @@
-MONGO_URL=mongodb://127.0.0.1:27017/coder61035
+MONGO_URL=mongodb+srv://mauricioarbelaiz:HNIwCQm6O2CFJRKK@ecommers.5kqcgxf.mongodb.net/?retryWrites=true&w=majority&appName=Ecommers
