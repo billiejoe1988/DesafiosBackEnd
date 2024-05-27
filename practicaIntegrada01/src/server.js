@@ -9,6 +9,7 @@ import productsRouter from './routes/product.router.js';
 import routerCart from './routes/cart.router.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { initMongoDB } from './daos/mongodb/connection.js';
+import { saveMessageToMongoDB, saveMessageToFileSystem } from './services/message.services.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,12 +35,8 @@ app.get('/', (req, res) => {
 });
 app.use(errorHandler);
 
-app.get('/', async (req, res) => {
-    res.render('home', { products: await productManager.getProducts() });
-});
-
-app.get('/realtimeproducts', async (req, res) => {
-    res.render('realtimeproducts');
+app.get('/chat', (req, res) => {
+    res.render('chat');
 });
 
 socketServer.on('connection', (socket) => {
@@ -47,15 +44,16 @@ socketServer.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('Usuario desconectado');
     });
-    socket.emit('saludoDesdeBack', 'Bienvenido a websockets');
-    socket.on('newProduct', async (prod) => {
-        await productManager.createProduct(prod);
-        const products = await productManager.getProducts();
-        socketServer.emit('products', products);
+    socket.on('message', async (data) => {
+        await saveMessageToMongoDB(data.user, data.message);
+        saveMessageToFileSystem(data.user, data.message);
+        socketServer.emit('message', data);
     });
 });
 
 initMongoDB();
 
 const PORT = 8080;
-httpServer.listen(PORT, () => console.log(`Servidor funcionando en el puerto ${PORT}`));
+httpServer.listen(PORT, () => {
+    console.log(`Servidor funcionando en el puerto ${PORT}`);
+});
