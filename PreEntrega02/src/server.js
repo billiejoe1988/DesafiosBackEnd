@@ -4,7 +4,8 @@ import exphbs from 'express-handlebars';
 import express from 'express';
 import morgan from 'morgan';
 import http from 'http';
-import { Server } from 'socket.io';
+import { Server } from 'socket.io'; 
+import userRouter from './routes/users.router.js';
 import productsRouter from './routes/product.router.js';
 import routerCart from './routes/cart.router.js';
 import { errorHandler } from './middlewares/errorHandler.js';
@@ -27,7 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
-
+app.use('/users', userRouter);
 app.use('/products', productsRouter);
 app.use('/carts', routerCart);
 app.get('/', (req, res) => {

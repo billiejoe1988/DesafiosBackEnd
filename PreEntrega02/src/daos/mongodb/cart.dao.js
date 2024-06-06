@@ -47,4 +47,69 @@ export default class CartDaoMongoDB {
       throw new Error(error);
     }
   }
+
+  async addProdToCart(cid, pid, quantity) {
+    try {
+      const cart = await CartModel.findById(cid);
+      if (!cart) return null;
+      const existProdIndex = cart.products.findIndex(p => p.product.toString() === pid);
+
+      if(existProdIndex !== -1) {
+        cart.products[existProdIndex].quantity = quantity;
+      } else cart.products.push({ product: pid, quantity });
+
+      await cart.save();
+
+      return cart;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async existProdInCart(cid, pid){
+    try {
+      return await CartModel.findOne({
+        _id: cid,
+        products: { $elemMatch: { product: pid } }
+      })
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async removeProdToCart(cid, pid) {
+    try {
+      return await CartModel.findOneAndUpdate(
+        { _id: cid },
+        { $pull: { products: { product: pid } } },
+        { new: true }
+      );
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async updateProdQuantityToCart(cid, pid, quantity) {
+    try {
+     return await CartModel.findOneAndUpdate(
+      { _id: cid, 'products.product': pid },
+      { $set: { 'products.$.quantity': quantity } },
+      { new: true }
+     );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async clearCart(cid) {
+    try {
+     return await CartModel.findByIdAndUpdate(
+      cid,
+      { $set: { products: [] } },
+      { new: true }
+     );
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

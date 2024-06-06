@@ -3,11 +3,11 @@ import ProductDaoFS from '../daos/filesystem/product.dao.js';
 
 const prodDao = new ProductDaoFS(`${__dirname}/daos/filesystem/products.json`);
 
-export const getAll = async () => {
+export const getAll = async (page, limit, name, sort) => {
   try {
-    return await prodDao.getAll();
+    return await prodDao.getAll(page, limit, name, sort);
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 };
 
