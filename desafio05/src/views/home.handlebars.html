@@ -7,6 +7,12 @@
 </head>
 <body>
     <h1>Listado de Productos</h1>
+    {{#if user}}
+        <p>Bienvenido, {{user.first_name}} {{user.last_name}}!</p>
+        <form action="/logout" method="POST">
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    {{/if}}
     <ul>
         {{#each products}}
         <li>{{this.title}} - ${{this.price}}</li>

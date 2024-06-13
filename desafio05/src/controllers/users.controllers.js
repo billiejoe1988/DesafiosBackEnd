@@ -12,7 +12,7 @@ export const login = async (req, res) => {
     else {
       req.session.email = email;
       req.session.password = password;
-      res.redirect("/views/profile");
+      res.redirect("/products");
     }
   } catch (error) {
     throw new Error(error);
