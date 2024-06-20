@@ -1,17 +1,17 @@
 import { Strategy as GithubStrategy } from "passport-github2";
 import passport from "passport";
-import UserDao from "../daos/user.dao.js";
-const userDao = new UserDao();
+import UserDao from "../daos/mongodb/user.dao.js";
 import 'dotenv/config';
 
+const userDao = new UserDao();
+
 const strategyConfig = {
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: process.env.CALLBACK_URL
+    clientID: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    callbackURL: process.env.GITHUB_CALLBACK_URL
 };
 
 const registerOrLogin = async (accessToken, refreshToken, profile, done) => {
-  // console.log(profile);
   const email = profile._json.email;
   const user = await userDao.getByEmail(email);
   if (user) return done(null, user);
@@ -21,7 +21,6 @@ const registerOrLogin = async (accessToken, refreshToken, profile, done) => {
     email,
     image: profile._json.avatar_url,
     isGithub: true,
-    // image: ---
   });
   return done(null, newUser);
 };
