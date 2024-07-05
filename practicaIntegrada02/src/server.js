@@ -1,9 +1,10 @@
+import 'dotenv/config';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import exphbs from 'express-handlebars';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-import express from 'express';
+import express, { json, urlencoded } from 'express';
 import morgan from 'morgan';
 import http from 'http';
 import passport from "passport";
@@ -19,10 +20,9 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import MongoStore from 'connect-mongo';
 import { initMongoDB } from './daos/mongodb/connection.js';
 import { saveMessageToMongoDB, saveMessageToFileSystem } from './services/message.services.js';
-import dotenv from 'dotenv';
+import MainRouter from './routes/index.js';
 
-dotenv.config(); 
-
+const mainRouter = new MainRouter();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -37,8 +37,8 @@ app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware y configuraciones
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(session(configSession));
@@ -73,12 +73,15 @@ app.use(morgan('dev'));
 app.use('/users', userRouter);
 app.use('/products', productsRouter);
 app.use('/carts', routerCart);
+app.use('/api', mainRouter.getRouter());
 app.use('/', viewsRouter);
 
 app.use(errorHandler);
+
 app.get('/', (req, res) => {
     res.redirect('/products');
 });
+
 app.get('/chat', (req, res) => {
     res.render('chat');
 });
@@ -98,7 +101,8 @@ socketServer.on('connection', (socket) => {
     });
 });
 
-initMongoDB();
+const PERSISTENCE = process.env.PERSISTENCE;
+if (PERSISTENCE === 'MONGO') initMongoDB();
 
 const PORT = process.env.PORT || 8080;
 httpServer.listen(PORT, () => {
