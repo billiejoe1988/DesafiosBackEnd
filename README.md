@@ -6,6 +6,7 @@
 -Desafio 4 = clase 10, Websockets
 -Desafio 5 = clase 19. Login
 -Desafio 6 = clase 21, Auth en el login
+-Desafio 7 = clase 27, Arq del servidor: design
 
 ---------------------------------------------------------------
 
@@ -15,4 +16,5 @@
 ---------------------------------------------------------------
 
 -PracticaIntegrada01 
+-PracticaIntegradora02
 
