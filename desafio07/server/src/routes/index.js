@@ -1,6 +1,6 @@
 import { Router } from "express";
 import productRouter from './product.router.js';
-import userRouter from './user.router.js';
+import userRouter from './users.router.js';
 import cartRouter from './cart.router.js';
 
 export default class MainRouter {

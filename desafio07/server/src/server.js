@@ -76,6 +76,14 @@ app.use('/carts', routerCart);
 app.use('/api', mainRouter.getRouter());
 app.use('/', viewsRouter);
 
+// Manejar solicitudes para la aplicación React
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// Ruta para todas las solicitudes no manejadas por Express (dejar que React maneje las rutas)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 app.use(errorHandler);
 
 app.get('/', (req, res) => {
