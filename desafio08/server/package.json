@@ -21,6 +21,7 @@
     "express-handlebars": "^7.1.2",
     "express-session": "^1.18.0",
     "http": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.6.2",
     "mongoos": "^0.0.1-security",
     "mongoose": "^7.6.13",

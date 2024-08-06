@@ -1,7 +1,13 @@
-import {__dirname} from '../utils.js';
-import ProductDaoFS from '../daos/filesystem/product.dao.js';
+import Services from "./class.services.js";
+import ProductDaoMongo from "../daos/mongodb/product.dao.js";
 
-const prodDao = new ProductDaoFS(`${__dirname}/daos/filesystem/products.json`);
+const prodDao = new ProductDaoMongo();
+
+export default class ProductService extends Services {
+    constructor(){
+        super(prodDao);
+    }
+};
 
 export const getAll = async (page, limit, name, sort) => {
   try {

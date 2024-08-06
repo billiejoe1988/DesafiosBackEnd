@@ -1,9 +1,10 @@
-import { createResponse } from '../utils.js'
+import { HttpResponse } from "../utils/http.response.js";
+const httpResponse = new HttpResponse();
 
 export const checkAdmin = async (req, res, next) => {
   try {
     const { role } = req.user;
-    if (role !== "admin") createResponse(res, 401, "Este endpoint es para usuarios administradores" )
+    if (role !== "admin") return httpResponse.Unauthorized(res, "Este endpoint es para usuarios administradores") 
     else next();
   } catch (error) {
     next(error);

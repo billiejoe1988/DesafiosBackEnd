@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
+    default: "user",
+  },
+  role: {
+    type: String,
     default: 'user'
   },
   image: {
@@ -32,7 +36,13 @@ const UserSchema = new mongoose.Schema({
   },
   isGithub: {
     type: Boolean,
-    default: false
+    required: true,
+    default: false,
+  },
+  cart: {
+    type: Schema.Types.ObjectId,
+    ref: "carts",
+    default: []
   }
 });
 
