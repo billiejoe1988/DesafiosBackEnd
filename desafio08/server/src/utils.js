@@ -17,7 +17,7 @@ export const createHash = password => bcryptjs.hashSync(password, bcryptjs.genSa
  * 
  * @param {*} user usuario encontrado en base de datos.
  * @param {*} password contraseña proporcionada por el usuario, sin encriptar.
- * @returns boolean
+ * @returns booleano
  */
 export const isValidPassword = (user, password) => bcryptjs.compareSync(password, user.password);
 

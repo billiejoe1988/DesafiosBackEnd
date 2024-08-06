@@ -23,6 +23,9 @@
 7. **Desafío 7 - Clase 27: Arquitectura del Servidor**
    - Diseño y organización de la arquitectura del servidor para optimizar su funcionalidad y mantenimiento.
 
+8. **Desafío 8 - Clase 32: Optimizacion**
+   - Mocking y manejo de errores.
+
 ## PreEntregas
 
 1. **PreEntrega 1: Cart & Product Manager | Routes**
