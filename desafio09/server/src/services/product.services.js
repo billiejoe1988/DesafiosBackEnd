@@ -7,8 +7,9 @@ export default class ProductService extends Services {
     constructor(){
         super(prodDao);
     }
-};
+}
 
+// Métodos para productos reales
 export const getAll = async (page, limit, name, sort) => {
   try {
     return await prodDao.getAll(page, limit, name, sort);
@@ -44,6 +45,23 @@ export const update = async (pid, obj) => {
 export const remove = async (pid) => {
   try {
     return await prodDao.delete(pid);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// Métodos para productos de mocking
+export const createProd = async (obj) => {
+  try {
+    return await prodDao.createProd(obj);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const getProds = async () => {
+  try {
+    return await prodDao.getProds();
   } catch (error) {
     throw new Error(error);
   }
