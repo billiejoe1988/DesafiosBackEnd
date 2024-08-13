@@ -26,6 +26,9 @@
 8. **Desafío 8 - Clase 32: Optimizacion**
    - Mocking y manejo de errores.
 
+9. **Desafío 9 - Clase 34: Logging y Performance**
+   - Implementacion del logger.
+
 ## PreEntregas
 
 1. **PreEntrega 1: Cart & Product Manager | Routes**
