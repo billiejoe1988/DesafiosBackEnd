@@ -75,6 +75,7 @@ app.use('/products', productsRouter);
 app.use('/carts', routerCart);
 app.use('/api', mainRouter.getRouter());
 app.use('/', viewsRouter);
+app.use("/api/users", userRoute);
 
 // Manejar solicitudes para la aplicación React
 app.use(express.static(path.join(__dirname, 'client/build')));

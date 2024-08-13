@@ -5,6 +5,9 @@ import "dotenv/config";
 import { createHash, isValidPassword } from "../utils/utils.js";
 import CartDaoMongo from "../daos/mongodb/cart.dao.js";
 import UserRepository from "../repository/user.repository.js";
+import { UserModel } from '../daos/mongodb/models/user.model.js';
+import {generateUser} from '../utils/user.utils.js';
+
 const userRepository = new UserRepository();
 
 const userDao = new UserDaoMongo();
@@ -127,5 +130,26 @@ export const deleteUser = async (id) => {
     return userDeleted;
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const createUsersMock = async (cant = 50) => {
+  try {
+    const usersArray = [];
+    for (let i = 0; i < cant; i++) {
+      const user = generateUser();
+      usersArray.push(user);
+    }
+    return await UserModel.create(usersArray);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const getUsers = async() => {
+  try {
+    return await UserModel.find({})
+  } catch (error) {
+    throw new Error(error);
   }
 };

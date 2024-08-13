@@ -88,3 +88,36 @@ export const remove = async (req, res, next) => {
     next(error.message);
   }
 };
+
+// Controladores para productos de mocking
+export const createProd = async (req, res, next) => {
+  try {
+    const { title, price, description } = req.body;
+
+    if (!title || !price) {
+      return res.status(400).json({ msg: 'Title and price are required fields' });
+    }
+
+    const newProd = await service.createProd(req.body);
+    if (!newProd) {
+      return res.status(500).json({ msg: 'Error creating mock product' });
+    }
+
+    res.json(newProd);
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      const errors = Object.values(error.errors).map(err => err.message);
+      return res.status(400).json({ msg: errors });
+    }
+    next(error.message);
+  }
+};
+
+export const getProds = async (req, res, next) => {
+  try {
+    const prods = await service.getProds();
+    res.json(prods);
+  } catch (error) {
+    next(error.message);
+  }
+};

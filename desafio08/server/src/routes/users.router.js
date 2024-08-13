@@ -10,6 +10,8 @@ router.get('/:id', controller.getById);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.delete('/:id', controller.remove);
+router.post('/create', controller.createUser);
+router.get('/', userController.getUsers)
 
 // Rutas de autenticación y sesión
 router.post('/register', passport.authenticate('register'), controller.registerResponse);
