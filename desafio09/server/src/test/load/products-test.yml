@@ -1,0 +1,18 @@
+config:
+  target: "http://localhost:8080"  
+  phases:
+    - duration: 60  
+      arrivalRate: 10  
+scenarios:
+  - name: "Prueba de Productos"
+    flow:
+      - get:
+          url: "/products" 
+      - get:
+          url: "/products/mockingproducts"  
+      - post:
+          url: "/products/mockingproducts"
+          json:
+            title: "Producto de prueba"
+            price: 100
+            description: "Un producto de prueba"

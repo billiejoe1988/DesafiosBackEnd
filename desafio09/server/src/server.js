@@ -1,11 +1,7 @@
 import 'dotenv/config';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import exphbs from 'express-handlebars';
-import cookieParser from 'cookie-parser';
-import session from 'express-session';
 import express, { json, urlencoded } from 'express';
-import morgan from 'morgan';
 import http from 'http';
 import passport from "passport";
 import "./passport/local.js";
@@ -21,6 +17,7 @@ import MongoStore from 'connect-mongo';
 import { initMongoDB } from './daos/mongodb/connection.js';
 import { saveMessageToMongoDB, saveMessageToFileSystem } from './services/message.services.js';
 import MainRouter from './routes/index.js';
+import logger from './utils/logger.js'; 
 
 const mainRouter = new MainRouter();
 const __filename = fileURLToPath(import.meta.url);
@@ -67,15 +64,26 @@ app.use(session(storeConfig));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Middleware registrar solicitudes HTTP
-app.use(morgan('dev'));
+// Agregar el logger en puntos importantes
+logger.debug('Logger en desarrollo iniciado');
+logger.info('Configuración de la aplicación cargada');
+logger.warn('Asegúrate de revisar los logs regularmente');
 
+// Rutas
 app.use('/users', userRouter);
 app.use('/products', productsRouter);
 app.use('/carts', routerCart);
 app.use('/api', mainRouter.getRouter());
 app.use('/', viewsRouter);
-app.use("/api/users", userRoute);
+
+// Ruta para probar logs
+app.get('/loggerTest', (req, res) => {
+    logger.debug('Mensaje de depuración desde /loggerTest');
+    logger.info('Mensaje informativo desde /loggerTest');
+    logger.warn('Mensaje de advertencia desde /loggerTest');
+    logger.error('Mensaje de error desde /loggerTest');
+    res.send('Logs generados. Revisa la consola y el archivo error.log.');
+});
 
 // Manejar solicitudes para la aplicación React
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -97,10 +105,10 @@ app.get('/chat', (req, res) => {
 
 // Socket.io para manejar la comunicación
 socketServer.on('connection', (socket) => {
-    console.log(`Usuario conectado: ${socket.id}`);
+    logger.info(`Usuario conectado: ${socket.id}`);
 
     socket.on('disconnect', () => {
-        console.log('Usuario desconectado');
+        logger.info('Usuario desconectado');
     });
 
     socket.on('message', async (data) => {
@@ -115,5 +123,5 @@ if (PERSISTENCE === 'MONGO') initMongoDB();
 
 const PORT = process.env.PORT || 8080;
 httpServer.listen(PORT, () => {
-    console.log(`Servidor funcionando en el puerto ${PORT}`);
+    logger.info(`Servidor funcionando en el puerto ${PORT}`);
 });
