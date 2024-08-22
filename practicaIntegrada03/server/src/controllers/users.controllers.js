@@ -1,6 +1,8 @@
 import * as service from "../services/user.services.js";
 import UserDao from "../daos/mongodb/user.dao.js";
 import { UserModel } from "../daos/mongodb/models/user.model.js";
+import { createResponse } from "../utils.js";
+import { sendMail } from "../services/mailing.service.js";
 
 const userDao = new UserDao(UserModel);
 
@@ -212,3 +214,17 @@ export const getUsers = async (req, res) => {
     console.log(error);
   }
 };
+
+generateResetPass = async(req, res, next) => {
+  try {
+    const user = req.user;
+    const token = await userService.generateResetPass(user);
+    if(token){
+      await sendMail(user, 'resetPass', token);
+      res.cookie('tokenpass', token);
+      createResponse(res, 200, 'Email reset pass send OK')
+    } else createResponse(res, 404, 'error email reset pass send')
+  } catch (error) {
+    next(error)
+  }
+}
