@@ -48,6 +48,9 @@
 2. **Práctica Integradora 02**
    - Otro ejercicio práctico para consolidar los conocimientos adquiridos a lo largo del curso.
 
+3. **Práctica Integradora 02**
+   - Otro ejercicio práctico para consolidar los conocimientos.
+
 ---
 
 Este proyecto forma parte de un e-commerce desarrollado con el stack MERN (MongoDB, Express.js, React, Node.js), utilizando Vite para la configuración del cliente con React.
