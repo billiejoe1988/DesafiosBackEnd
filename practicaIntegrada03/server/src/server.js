@@ -6,20 +6,22 @@ import http from 'http';
 import passport from "passport";
 import "./passport/local.js";
 import "./passport/github.js";
-import { Server } from 'socket.io'; 
+import { Server } from 'socket.io';
+import exphbs from 'express-handlebars';  // Importa Handlebars
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import userRouter from './routes/users.router.js';
 import productsRouter from './routes/product.router.js';
 import routerCart from './routes/cart.router.js';
 import viewsRouter from './routes/views.router.js';
+import MainRouter from './routes/index.js';
 import { configSession } from "./config/config.session.js";
 import { errorHandler } from './middlewares/errorHandler.js';
-import MongoStore from 'connect-mongo';
 import { initMongoDB } from './daos/mongodb/connection.js';
 import { saveMessageToMongoDB, saveMessageToFileSystem } from './services/message.services.js';
-import MainRouter from './routes/index.js';
-import logger from './utils/logger.js'; 
+import logger from './utils/logger.js';
 
-const mainRouter = new MainRouter();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -38,9 +40,7 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
-app.use(session(configSession));
 
-// Configuración connect-mongo
 const store = MongoStore.create({
     mongoUrl: process.env.MONGO_URL,
     ttl: 180 * 60, 
@@ -60,7 +60,6 @@ const storeConfig = {
 };
 
 app.use(session(storeConfig));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -73,7 +72,7 @@ logger.warn('Asegúrate de revisar los logs regularmente');
 app.use('/users', userRouter);
 app.use('/products', productsRouter);
 app.use('/carts', routerCart);
-app.use('/api', mainRouter.getRouter());
+app.use('/api', new MainRouter().getRouter());
 app.use('/', viewsRouter);
 
 // Ruta para probar logs
@@ -88,22 +87,23 @@ app.get('/loggerTest', (req, res) => {
 // Manejar solicitudes para la aplicación React
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// Ruta para todas las solicitudes no manejadas por Express (dejar que React maneje las rutas)
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 app.use(errorHandler);
 
+// Página principal de la aplicación
 app.get('/', (req, res) => {
     res.redirect('/products');
 });
 
+// Página de chat
 app.get('/chat', (req, res) => {
     res.render('chat');
 });
 
-// Socket.io para manejar la comunicación
+// Socket.io para manejar la comunicación en tiempo real
 socketServer.on('connection', (socket) => {
     logger.info(`Usuario conectado: ${socket.id}`);
 
@@ -118,9 +118,11 @@ socketServer.on('connection', (socket) => {
     });
 });
 
+// Inicialización de MongoDB si se usa como persistencia
 const PERSISTENCE = process.env.PERSISTENCE;
 if (PERSISTENCE === 'MONGO') initMongoDB();
 
+// Arranque del servidor
 const PORT = process.env.PORT || 8080;
 httpServer.listen(PORT, () => {
     logger.info(`Servidor funcionando en el puerto ${PORT}`);

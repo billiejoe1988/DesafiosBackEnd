@@ -2,7 +2,7 @@ import Services from "./class.services.js";
 import UserDaoMongo from "../daos/mongodb/user.dao.js";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import config from "../config/index.js";
+import config from "../config/config.js";
 import { sendMail } from "./mailing.service.js";
 import { createHash, isValidPassword } from "../utils/utils.js";
 import CartDaoMongo from "../daos/mongodb/cart.dao.js";

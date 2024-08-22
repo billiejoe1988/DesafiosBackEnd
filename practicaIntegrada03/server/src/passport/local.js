@@ -1,7 +1,9 @@
-import UserDao from '../daos/mongodb/user.dao.js';
-const userDao = new UserDao();
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
+import UserDao from '../daos/mongodb/user.dao.js';
+import 'dotenv/config';  
+
+const userDao = new UserDao();
 
 const strategyOptions = {
     usernameField: 'email',
@@ -9,7 +11,7 @@ const strategyOptions = {
     passReqToCallback: true
 };
 
-const signup = async (req, email, password, done) =>{
+const signup = async (req, email, password, done) => {
     try {
         const user = await userDao.getByEmail(email);
         if(user) return done(null, false);
@@ -17,10 +19,11 @@ const signup = async (req, email, password, done) =>{
         return done(null, newUser);
     } catch (error) {
         console.log(error);
+        done(error);
     }
 };
 
-const login = async (req, email, password, done) =>{
+const login = async (req, email, password, done) => {
     const user = { email, password };
     const userLogin = await userDao.loginUser(user);
     if(!userLogin) return done(null, false);
@@ -33,7 +36,6 @@ const loginStrategy = new LocalStrategy(strategyOptions, login);
 passport.use('register', signupStrategy);
 passport.use('login', loginStrategy);
 
-// Registra al user en req.session.passport
 passport.serializeUser((user, done) => {
     done(null, user._id);
 });
@@ -42,3 +44,5 @@ passport.deserializeUser(async(id, done) => {
     const user = await userDao.getById(id);
     return done(null, user);
 });
+
+export default passport;
