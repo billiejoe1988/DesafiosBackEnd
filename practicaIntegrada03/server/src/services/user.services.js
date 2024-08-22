@@ -2,6 +2,8 @@ import Services from "./class.services.js";
 import UserDaoMongo from "../daos/mongodb/user.dao.js";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
+import config from "../config/index.js";
+import { sendMail } from "./mailing.service.js";
 import { createHash, isValidPassword } from "../utils/utils.js";
 import CartDaoMongo from "../daos/mongodb/cart.dao.js";
 import UserRepository from "../repository/user.repository.js";
@@ -31,16 +33,14 @@ export default class UserService extends Services {
       const existUser = await this.dao.getByEmail(email);
       if (!existUser) {
         const cartUser = await cartDao.create();
-        if (
-          email === process.env.EMAIL_ADMIN &&
-          password === process.env.PASS_ADMIN
-        ) {
+        if (email === config.EMAIL_ADMIN && password === config.PASS_ADMIN) {
           const newUser = await this.dao.create({
             ...user,
             password: createHash(password),
             role: "admin",
             cart: cartUser._id,
           });
+          await sendMail(user, "register");
           return newUser;
         } else {
           const newUser = await this.dao.create({
@@ -48,6 +48,7 @@ export default class UserService extends Services {
             password: createHash(password),
             cart: cartUser._id,
           });
+          await sendMail(user, "register");
           return newUser;
         }
       }
@@ -77,6 +78,17 @@ export default class UserService extends Services {
       throw new Error(error);
     }
   };
+
+  async updatePass(pass, user){
+    try {
+      const isEqual = isValidPassword(pass, user);
+      if(isEqual) return null;
+      const newPass = createHash(pass);
+      return await this.dao.update(user._id, { password: newPass });
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
 }
 
 
