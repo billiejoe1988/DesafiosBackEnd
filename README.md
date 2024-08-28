@@ -27,7 +27,10 @@
    - Mocking y manejo de errores.
 
 9. **Desafío 9 - Clase 34: Logging y Performance**
-   - Implementacion del logger con artillery.
+   - Implementacion del logger con artillery
+   
+9. **Desafío 10 - Clase 39: Documentacion API**
+   - Documentacion de API
 
 ## PreEntregas
 
