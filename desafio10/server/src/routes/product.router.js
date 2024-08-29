@@ -119,6 +119,11 @@ router.get("/:pid", (req, res, next) => {
  *     tags: [Product]
  *     security:
  *       - bearerAuth: []
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Product'
  *     responses:
  *       201:
  *         description: Producto creado con éxito
@@ -154,6 +159,11 @@ router.post("/", isAuth, (req, res, next) => {
  *           type: string
  *         required: true
  *         description: ID del producto
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Product'
  *     responses:
  *       200:
  *         description: Producto actualizado con éxito

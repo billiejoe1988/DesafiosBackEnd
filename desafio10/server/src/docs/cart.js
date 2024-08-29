@@ -1,11 +1,3 @@
-import { Router } from "express";
-import CartController from '../controllers/cart.controller.js';
-import { checkAuth } from "../middlewares/authJwt.js";
-import { checkAdmin } from "../middlewares/checkAdmin.js";
-const controller = new CartController();
-
-const router = Router();
-
 /**
  * @swagger
  * components:
@@ -53,7 +45,6 @@ const router = Router();
  *               items:
  *                 $ref: '#/components/schemas/Cart'
  */
-router.get("/", [checkAuth, checkAdmin], controller.getAll);
 
 /**
  * @swagger
@@ -80,7 +71,6 @@ router.get("/", [checkAuth, checkAdmin], controller.getAll);
  *       404:
  *         description: Carrito no encontrado
  */
-router.get("/:id", [checkAuth], controller.getById);
 
 /**
  * @swagger
@@ -98,7 +88,6 @@ router.get("/:id", [checkAuth], controller.getById);
  *             schema:
  *               $ref: '#/components/schemas/Cart'
  */
-router.post("/", [checkAuth, checkAdmin], controller.create);
 
 /**
  * @swagger
@@ -125,7 +114,6 @@ router.post("/", [checkAuth, checkAdmin], controller.create);
  *       404:
  *         description: Carrito no encontrado
  */
-router.put("/:id", [checkAuth, checkAdmin], controller.update);
 
 /**
  * @swagger
@@ -148,7 +136,6 @@ router.put("/:id", [checkAuth, checkAdmin], controller.update);
  *       404:
  *         description: Carrito no encontrado
  */
-router.delete("/:id", [checkAuth, checkAdmin], controller.delete);
 
 /**
  * @swagger
@@ -169,7 +156,6 @@ router.delete("/:id", [checkAuth, checkAdmin], controller.delete);
  *       200:
  *         description: Producto agregado al carrito con éxito
  */
-router.post("/products/:idProd", [checkAuth], controller.addProdToCart);
 
 /**
  * @swagger
@@ -198,7 +184,6 @@ router.post("/products/:idProd", [checkAuth], controller.addProdToCart);
  *       404:
  *         description: Producto o carrito no encontrado
  */
-router.delete("/:idCart/products/:idProd", [checkAuth], controller.removeProdToCart);
 
 /**
  * @swagger
@@ -227,7 +212,6 @@ router.delete("/:idCart/products/:idProd", [checkAuth], controller.removeProdToC
  *       404:
  *         description: Producto o carrito no encontrado
  */
-router.put("/:idCart/products/:idProd", [checkAuth], controller.updateProdQuantityToCart);
 
 /**
  * @swagger
@@ -246,10 +230,7 @@ router.put("/:idCart/products/:idProd", [checkAuth], controller.updateProdQuanti
  *         description: ID del carrito
  *     responses:
  *       200:
- *         description: Carrito limpiado con éxito
+ *         description: Todos los productos han sido eliminados del carrito
  *       404:
  *         description: Carrito no encontrado
  */
-router.delete("/clear/:idCart", [checkAuth], controller.clearCart);
-
-export default router;

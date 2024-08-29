@@ -39,9 +39,9 @@ const swaggerOptions = {
             },
         ],
     },
-    apis: ['./src/routes/*.js'], // Asegúrate de que la ruta sea correcta
-    //accede a http://localhost:8080/api-docs para ver los comentarios
+    apis: ['./src/docs/*.js'],
 };
+ //accede a http://localhost:8080/api-docs para ver los comentarios y en la carpeta q quiero guardar los swagger
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 
