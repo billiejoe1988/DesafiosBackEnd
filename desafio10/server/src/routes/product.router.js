@@ -30,7 +30,8 @@ router.get("/:pid", (req, res, next) => {
         });
 });
 
-router.post("/", (req, res, next) => {
+//con user auth
+router.post("/", isAuth, (req, res, next) => {
     logger.info('POST /products request received');
     controller.create(req, res, next)
         .then(result => {
@@ -42,7 +43,8 @@ router.post("/", (req, res, next) => {
         });
 });
 
-router.put("/:pid", (req, res, next) => {
+//con user auth
+router.put("/:pid", isAuth, (req, res, next) => {
     logger.info(`PUT /products/${req.params.pid} request received`);
     controller.update(req, res, next)
         .then(result => {
@@ -54,7 +56,8 @@ router.put("/:pid", (req, res, next) => {
         });
 });
 
-router.delete("/:pid", (req, res, next) => {
+//con user auth
+router.delete("/:pid", isAuth, (req, res, next) => {
     logger.info(`DELETE /products/${req.params.pid} request received`);
     controller.remove(req, res, next)
         .then(result => {

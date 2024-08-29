@@ -44,7 +44,8 @@ export const create = async (req, res, next) => {
       return res.status(400).json({ msg: 'Title and price are required fields' });
     }
 
-    const newProd = await service.create(req.body);
+    //agrega id si es owner
+    const newProd = await service.create({ ...req.body, owner: req.user._id });
     if (!newProd) {
       return res.status(500).json({ msg: 'Error creating product' });
     }
@@ -62,6 +63,16 @@ export const create = async (req, res, next) => {
 export const update = async (req, res, next) => {
   try {
     const { pid } = req.params;
+
+    // si esta auth es owner
+    const product = await service.getById(pid);
+    if (!product) {
+      return res.status(404).json({ msg: 'Product not found' });
+    }
+    if (product.owner.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ msg: 'Not authorized to update this product' });
+    }
+
     const prodUpd = await service.update(pid, req.body);
     if (!prodUpd) {
       return res.status(404).json({ msg: 'Error updating product' });
@@ -79,6 +90,16 @@ export const update = async (req, res, next) => {
 export const remove = async (req, res, next) => {
   try {
     const { pid } = req.params;
+
+    // si esta es owner
+    const product = await service.getById(pid);
+    if (!product) {
+      return res.status(404).json({ msg: 'Product not found' });
+    }
+    if (product.owner.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ msg: 'Not authorized to delete this product' });
+    }
+
     const prodDel = await service.remove(pid);
     if (!prodDel) {
       return res.status(404).json({ msg: 'Error removing product' });
