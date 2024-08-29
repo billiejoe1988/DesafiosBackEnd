@@ -6,6 +6,64 @@ import logger from '../utils/logger.js';
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Product:
+ *       type: object
+ *       required:
+ *         - title
+ *         - price
+ *       properties:
+ *         pid:
+ *           type: string
+ *           description: ID del producto
+ *         title:
+ *           type: string
+ *           description: Título del producto
+ *         description:
+ *           type: string
+ *           description: Descripción del producto
+ *         price:
+ *           type: number
+ *           description: Precio del producto
+ *         code:
+ *           type: string
+ *           description: Código del producto
+ *         stock:
+ *           type: number
+ *           description: Cantidad en stock
+ *         status:
+ *           type: boolean
+ *           description: Estado del producto (activo o inactivo)
+ *         category:
+ *           type: string
+ *           description: Categoría del producto
+ *         thumbnail:
+ *           type: string
+ *           description: URL de la imagen del producto
+ *         owner:
+ *           type: string
+ *           description: ID del propietario del producto
+ */
+
+/**
+ * @swagger
+ * /products:
+ *   get:
+ *     summary: Obtiene todos los productos
+ *     tags: [Product]
+ *     responses:
+ *       200:
+ *         description: Lista de productos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
+ */
 router.get("/", (req, res, next) => {
     logger.info('GET /products request received');
     controller.getAll(req, res, next)
@@ -18,6 +76,29 @@ router.get("/", (req, res, next) => {
         });
 });
 
+/**
+ * @swagger
+ * /products/{pid}:
+ *   get:
+ *     summary: Obtiene un producto por ID
+ *     tags: [Product]
+ *     parameters:
+ *       - in: path
+ *         name: pid
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID del producto
+ *     responses:
+ *       200:
+ *         description: Detalles del producto
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
+ *       404:
+ *         description: Producto no encontrado
+ */
 router.get("/:pid", (req, res, next) => {
     logger.info(`GET /products/${req.params.pid} request received`);
     controller.getById(req, res, next)
@@ -30,7 +111,22 @@ router.get("/:pid", (req, res, next) => {
         });
 });
 
-//con user auth
+/**
+ * @swagger
+ * /products:
+ *   post:
+ *     summary: Crea un nuevo producto
+ *     tags: [Product]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       201:
+ *         description: Producto creado con éxito
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
+ */
 router.post("/", isAuth, (req, res, next) => {
     logger.info('POST /products request received');
     controller.create(req, res, next)
@@ -43,7 +139,31 @@ router.post("/", isAuth, (req, res, next) => {
         });
 });
 
-//con user auth
+/**
+ * @swagger
+ * /products/{pid}:
+ *   put:
+ *     summary: Actualiza un producto existente
+ *     tags: [Product]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: pid
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID del producto
+ *     responses:
+ *       200:
+ *         description: Producto actualizado con éxito
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
+ *       404:
+ *         description: Producto no encontrado
+ */
 router.put("/:pid", isAuth, (req, res, next) => {
     logger.info(`PUT /products/${req.params.pid} request received`);
     controller.update(req, res, next)
@@ -56,7 +176,27 @@ router.put("/:pid", isAuth, (req, res, next) => {
         });
 });
 
-//con user auth
+/**
+ * @swagger
+ * /products/{pid}:
+ *   delete:
+ *     summary: Elimina un producto por ID
+ *     tags: [Product]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: pid
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID del producto
+ *     responses:
+ *       200:
+ *         description: Producto eliminado con éxito
+ *       404:
+ *         description: Producto no encontrado
+ */
 router.delete("/:pid", isAuth, (req, res, next) => {
     logger.info(`DELETE /products/${req.params.pid} request received`);
     controller.remove(req, res, next)
@@ -69,6 +209,32 @@ router.delete("/:pid", isAuth, (req, res, next) => {
         });
 });
 
+/**
+ * @swagger
+ * /mockingproducts:
+ *   post:
+ *     summary: Crea productos simulados (solo admins)
+ *     tags: [Product]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       201:
+ *         description: Productos simulados creados con éxito
+ *   get:
+ *     summary: Obtiene productos simulados (solo admins)
+ *     tags: [Product]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de productos simulados
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
+ */
 router.route('/mockingproducts')
     .post(isAuth, checkAdmin, (req, res, next) => {
         logger.info('POST /mockingproducts request received');

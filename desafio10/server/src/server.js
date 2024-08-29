@@ -3,11 +3,11 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import express, { json, urlencoded } from 'express';
 import http from 'http';
-import passport from "passport";
-import "./passport/local.js";
-import "./passport/github.js";
+import passport from 'passport';
+import './passport/local.js';
+import './passport/github.js';
 import { Server } from 'socket.io';
-import exphbs from 'express-handlebars';  // Importa Handlebars
+import exphbs from 'express-handlebars';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
@@ -16,12 +16,36 @@ import productsRouter from './routes/product.router.js';
 import routerCart from './routes/cart.router.js';
 import viewsRouter from './routes/views.router.js';
 import MainRouter from './routes/index.js';
-import { configSession } from "./config/config.session.js";
+import { configSession } from './config/config.session.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { initMongoDB } from './daos/mongodb/connection.js';
 import { saveMessageToMongoDB, saveMessageToFileSystem } from './services/message.services.js';
 import logger from './utils/logger.js';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
+// Configuración de Swagger
+const swaggerOptions = {
+    swaggerDefinition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'E-commerce API',
+            version: '1.0.0',
+            description: 'Documentación de la API del proyecto de e-commerce',
+        },
+        servers: [
+            {
+                url: 'http://localhost:8080',
+            },
+        ],
+    },
+    apis: ['./src/routes/*.js'], // Asegúrate de que la ruta sea correcta
+    //accede a http://localhost:8080/api-docs para ver los comentarios
+};
+
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+
+// Configuración del servidor
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -43,10 +67,10 @@ app.use(cookieParser());
 
 const store = MongoStore.create({
     mongoUrl: process.env.MONGO_URL,
-    ttl: 180 * 60, 
+    ttl: 180 * 60,
     crypto: {
-        secret: process.env.SECRET_KEY
-    }
+        secret: process.env.SECRET_KEY,
+    },
 });
 
 const storeConfig = {
@@ -55,8 +79,8 @@ const storeConfig = {
     resave: true,
     saveUninitialized: true,
     cookie: {
-        maxAge: 180 * 1000 
-    }
+        maxAge: 180 * 1000,
+    },
 };
 
 app.use(session(storeConfig));
@@ -74,6 +98,9 @@ app.use('/products', productsRouter);
 app.use('/carts', routerCart);
 app.use('/api', new MainRouter().getRouter());
 app.use('/', viewsRouter);
+
+// Configuración de Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Ruta para probar logs
 app.get('/loggerTest', (req, res) => {
@@ -114,7 +141,7 @@ socketServer.on('connection', (socket) => {
     socket.on('message', async (data) => {
         await saveMessageToMongoDB(data.user, data.message);
         saveMessageToFileSystem(data.user, data.message);
-        socketServer.emit('message', data); 
+        socketServer.emit('message', data);
     });
 });
 
