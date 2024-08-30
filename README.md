@@ -29,8 +29,11 @@
 9. **Desafío 9 - Clase 34: Logging y Performance**
    - Implementacion del logger con artillery
    
-9. **Desafío 10 - Clase 39: Documentacion API**
+10. **Desafío 10 - Clase 39: Documentacion API**
    - Documentacion de API
+
+11. **Desafío 11 - Clase 41: Testiong avanzado**
+   - Agregar testings avanzado
 
 ## PreEntregas
 
