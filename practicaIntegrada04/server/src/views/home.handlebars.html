@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Listado de Productos</h1>
+    {{#if user}}
+        <p>Bienvenido, {{user.first_name}} {{user.last_name}}!</p>
+        <form action="/logout" method="POST">
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    {{/if}}
+    <ul>
+        {{#each products}}
+        <li>{{this.title}} - ${{this.price}}</li>
+        {{/each}}
+    </ul>
+</body>
+</html>
