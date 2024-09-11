@@ -46,6 +46,9 @@
 3. **PreEntrega 3: Mailing y Mensajería**
    - Integración de servicios de mailing y mensajería para la comunicación con los usuarios.
 
+4. **PreEntrega 4: Test y detalles**
+   - Casi cierre de la cursad, incluyendo test.
+
 ## Prácticas Integradas
 
 1. **Práctica Integrada 01**
