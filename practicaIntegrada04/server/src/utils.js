@@ -5,19 +5,16 @@ import bcryptjs from 'bcryptjs';
 export const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
- * Función que realiza el encriptado de contraseña a través de bcrypt con el método hashSync.
- * Recibe password sin encriptar,
- * retorna password encriptada
- * @param password tipo string
- * @returns password encriptada/hasheada
+ * @param password 
+ * @returns
  */
 export const createHash = password => bcryptjs.hashSync(password, bcryptjs.genSaltSync(10));
 
 /**
  * 
- * @param {*} user usuario encontrado en base de datos.
- * @param {*} password contraseña proporcionada por el usuario, sin encriptar.
- * @returns booleano
+ * @param {*} user
+ * @param {*} password 
+ * @returns 
  */
 export const isValidPassword = (user, password) => bcryptjs.compareSync(password, user.password);
 
