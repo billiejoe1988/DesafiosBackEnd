@@ -59,7 +59,7 @@
    - Otro ejercicio práctico para consolidar los conocimientos.
 
 4. **PreEntrega 4: Test y detalles**
-   - Casi cierre de la cursada, incluyendo test.
+   - Casi cierre de la cursada, incluyendo test..
 
 ---
 
