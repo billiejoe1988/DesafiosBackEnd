@@ -1,4 +1,3 @@
-//import UserDao from "../daos/mongodb/user.dao.js";
 import {
   createHash,
   hasBeenMoreThanXTime,

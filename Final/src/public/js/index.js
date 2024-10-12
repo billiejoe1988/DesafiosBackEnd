@@ -4,7 +4,6 @@ const productDiv = document.getElementById("productDiv");
 const btn = document.getElementById("btn");
 
 btn.addEventListener("click", () => {
-  //alert("actualizado");
   socketClient.emit("productUpdate");
 });
 

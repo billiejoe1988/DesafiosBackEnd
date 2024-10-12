@@ -29,14 +29,11 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
 //iniciamos el middleware de cookie parser
 const SECRET = config.COOKIE_KEY;
 app.use(cookieParser(SECRET)); //con esto queda disponible para utilizar en cualquier parte de la app
-//fin inicio cookie parser
 
 app.use(express.static(__dirname + "/public"));
-app.use(express.json());
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
-//Iniciamos la libreria express-sessions, es un middleware a nivel de aplicacion
-// para utilizar cookies en sesiones debemos inicializar cookiesParser antes.
 const SESSIONSECRET = config.SESSION_KEY;
 const connectionString = config.MONGO_URL;
 //para conectarnos a mongo loinicializamos con MongoStore.create y le pasamos los datos de configuracion

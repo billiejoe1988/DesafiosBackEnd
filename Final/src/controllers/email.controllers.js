@@ -15,7 +15,7 @@ import {
 
 const emailType = {
   register: {
-    subject: `Gracias por suscribirte a LiquidStore`,
+    subject: `Gracias por suscribirte a Store`,
     html: function (user) {
       return registerTemplate(user);
     },
@@ -78,7 +78,7 @@ export const sendGmail = async (req, res, next) => {
     const { subject } = emailType[type];
 
     const gmailOptions = {
-      from: `LiquidStore <${config.SENDER_GMAIL_USER}>`,
+      from: `Store <${config.SENDER_GMAIL_USER}>`,
       to: user.email,
       subject,
       html: emailType[type].html(user, productDeleted),

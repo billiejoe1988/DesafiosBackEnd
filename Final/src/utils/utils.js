@@ -2,7 +2,6 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import { faker } from "@faker-js/faker/locale/es";
-// faker.locale = "es";
 
 export const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -11,11 +10,6 @@ export const createHash = (password) =>
 
 export const isValidPassword = (password, hashedPassword) =>
   bcrypt.compareSync(password, hashedPassword);
-/* 
-Respuesta personalizada generica v1
-export const pResp = (res, statusCode, data) => {
-  return res.status(statusCode).json({ data });
-}; */
 
 export const generateProduct = () => {
   return {

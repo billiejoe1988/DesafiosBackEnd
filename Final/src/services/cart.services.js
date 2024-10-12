@@ -1,5 +1,3 @@
-// import cartDaoMongoDB from "../daos/mongodb/cart.dao.js";
-// const cartDao = new cartDaoMongoDB();
 
 import persistence from "../daos/factory.js";
 const { cartDao } = persistence;

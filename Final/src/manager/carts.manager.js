@@ -17,7 +17,6 @@ export class cartsManager {
     }
   };
   #validatecart = async (id) => {
-    //se va a usar para agregar productos al cart
     const carts = await this.getcarts();
     if (carts.length > 0) {
       const findId = carts.some((elem) => elem.code === code);
@@ -75,9 +74,7 @@ export class cartsManager {
     try {
       let carts = await this.getcarts();
       const cart = await this.getcartById(cid);
-      //if (!cart) res.status(400).json({ msj: "bad cart request" });
       const product = await productManager.getProductById(pid);
-      //if (!product) res.status(400).json({ msj: "bad product request" });
       const cartIndex = carts.findIndex((elem) => elem.cartId === cid);
 
       const productsIncart = carts[cartIndex].products;

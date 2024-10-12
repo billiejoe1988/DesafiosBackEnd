@@ -1,5 +1,3 @@
-// import ProductDaoMongoDB from "../daos/mongodb/product.dao.js";
-// const productDao = new ProductDaoMongoDB();
 import persistence from "../daos/factory.js";
 import { generateProduct } from "../utils/utils.js";
 const { prodDao } = persistence;

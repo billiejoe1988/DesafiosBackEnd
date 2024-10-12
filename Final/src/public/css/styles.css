@@ -1,5 +1,5 @@
 h1 {
-  color: brown;
+  color: blue;
 }
 
 body {
@@ -48,7 +48,7 @@ input {
 .btnLogout {
   margin-top: 15px;
   background-color: rgba(83, 83, 83, 0.106);
-  border: 1px, solid, red;
+  border: 1px, solid, lightblue;
 }
 .btnLogin:hover {
   cursor: pointer;
@@ -56,7 +56,7 @@ input {
 }
 .btnLogout:hover {
   cursor: pointer;
-  background-color: darkred;
+  background-color: darkslateblue;
 }
 .btnMove {
   margin-top: 15px;

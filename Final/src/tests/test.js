@@ -38,7 +38,7 @@ describe("TEST Products router", () => {
 describe("TEST User router", () => {
   test("[POST] / user login", async () => {
     const body = JSON.stringify({
-      email: "jp.sarobe@gmail.com",
+      email: "mauri.arbelaiz@gmail.com",
       password: "1234",
     });
     const resp = await fetch(`${apiURL}/user/login`, {
@@ -58,7 +58,7 @@ describe("TEST User router", () => {
 
   test("[POST] / user wrong login", async () => {
     const body = JSON.stringify({
-      email: "jp.sarobe@gmail.com",
+      email: "mauri.arbelaiz@gmail.com",
       password: "12345",
     });
     const resp = await fetch(`${apiURL}/user/login`, {

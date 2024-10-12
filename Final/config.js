@@ -1,18 +1,15 @@
-import dotenv from "dotenv"; //se importa cuando queres cambiar el dotenv a utilizar
+import dotenv from "dotenv"; 
 import "dotenv/config";
 
 const ENV =
   process.argv.slice(2)[0] === "prod"
     ? process.argv.slice(2)[0]
-    : process.env.ENV; //si quiero tener multiples .env para distintos entornos
+    : process.env.ENV; 
 const PERSISTENCE = process.argv.slice(2)[1];
 const languagesAvailable = process.env.LANGUAGESAVAILABLE;
 const LANGUAGE = languagesAvailable.includes(process.argv.slice(2)[2])
   ? process.argv.slice(2)[2]
   : process.env.LANGUAGE;
-
-//ejemplo, no aplicado en este proyecto.
-//dotenv.config({ path: ENV === "prod" ? ".env.prod" : "./.env.dev" });
 
 export default {
   MONGO_URL: process.env.MONGO_URL,
