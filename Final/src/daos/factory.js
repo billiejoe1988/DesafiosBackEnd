@@ -15,9 +15,6 @@ let persistence = config.PERSISTENCE;
 switch (persistence) {
   case "fs":
     prodDao = new ProductDaoFS("./src/data/products.json");
-
-    // userDao = new UserDaoFS('./src/daos/....
-    // cartDao = new
     break;
   case "mongo":
     initMongoDB();
@@ -27,14 +24,8 @@ switch (persistence) {
     ticketDao = new TicketDaoMongoDB();
 
     break;
-  // case 'sql':
-  //     userDao = new UserDaoSql();
-  //     prodDao = new ProductDaoSql();
-  //     cartDao = new CartDaoSqlDB();
+
   default:
-    //prodDao = new ProductDaoFS("./src/data/products.json");
-    // userDao = new UserDaoFS('./src/daos/....
-    // cartDao = new
 
     initMongoDB();
     userDao = new UserDaoMongo();
