@@ -4,6 +4,9 @@
 
  **Entrega Final del proyecto**
 
+ Documentación:
+ Se actualizo la documentación en swagger permitiendo hacer testing del upload de archivos. http://localHost:3000/docs
+
 ## Desafíos
 
 1. **Desafío 1 - Clase 2: ProductManager**
