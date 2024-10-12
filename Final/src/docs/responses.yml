@@ -1,0 +1,583 @@
+components:
+  schemas:
+    Products:
+      respCreate:
+        type: object
+        properties:
+          status:
+            type: integer
+            description: codigo 200
+            example: 200
+          message:
+            type: object
+            properties:
+              system:
+                type: string
+                description: success
+              custom:
+                type: string
+                description: ""
+          data:
+            type: object
+            properties:
+              title:
+                type: string
+                description: titulo del producto insertado
+              description:
+                type: string
+                description: descripción del producto insertado
+              price:
+                type: number
+                description: precio del producto insertado
+              img:
+                type: array
+                description: array de imagenes del producto insertado
+              code:
+                type: string
+                description: codigo del producto insertado
+              stock:
+                type: integer
+                description: cantidad del producto insertado
+                minimum: 0
+              category:
+                type: string
+                description: categoria del producto insertado
+              status:
+                type: boolean
+                description: status del producto insertado
+              faker:
+                type: boolean
+                description: indica si el producto es de testing
+              owner:
+                type: ObjectId
+                description: id del dueño del producto insertado
+              _id:
+                type: ObjectId
+                description: id del producto insertado
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            title: Refresco de uva
+            description: Refresco de uva con un sabor dulce y refrescante.
+            price: 1.99
+            img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+            code: "Refrescos1007"
+            stock: 45
+            category: "Refrescos"
+            status: true
+            faker: false
+            owner: "66c3d25674106f92f9b8f8b7"
+            _id: "66d4b785ffeb8dd190d446c5"
+
+      respGetByCategory:
+        type: object
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            payload:
+              - title: Refresco de uva
+                description: Refresco de uva con un sabor dulce y refrescante.
+                price: 1.99
+                img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+                code: "Refrescos1007"
+                stock: 45
+                category: "Refrescos"
+                status: true
+                faker: false
+                owner: "66c3d25674106f92f9b8f8b7"
+                _id: "66d4b785ffeb8dd190d446c5"
+              - title: Cerveza lager
+                description: Cerveza ligera
+                price: 1.99
+                img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+                code: "cerveza1001"
+                stock: 40
+                category: "Cervezas"
+                status: true
+                faker: false
+                owner: "66c3d25674106f92f9b8f8b7"
+                _id: "66d4b785ffeb8dd190d446c5"
+          info:
+            totalPages: 2,
+            prevPage: null,
+            nextPage: 2,
+            hasPrevPage: false,
+            hasNextPage: true,
+            prevLink: null,
+            nextLink: "http://localhost:8080/api/products/cat?limit=10&page=2&stock=25"
+
+      respGetProducts:
+        type: object
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            payload:
+              - title: Refresco de uva
+                description: Refresco de uva con un sabor dulce y refrescante.
+                price: 1.99
+                img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+                code: "Refrescos1007"
+                stock: 45
+                category: "Refrescos"
+                status: true
+                faker: false
+                owner: "66c3d25674106f92f9b8f8b7"
+                _id: "66d4b785ffeb8dd190d446c5"
+              - title: Cerveza lager
+                description: Cerveza ligera
+                price: 1.99
+                img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+                code: "cerveza1001"
+                stock: 40
+                category: "Cervezas"
+                status: true
+                faker: false
+                owner: "66c3d25674106f92f9b8f8b7"
+                _id: "66d4b785ffeb8dd190d446c5"
+          info:
+            totalPages: 2,
+            prevPage: null,
+            nextPage: 2,
+            hasPrevPage: false,
+            hasNextPage: true,
+            prevLink: null,
+            nextLink: "http://localhost:8080/api/products/cat?limit=10&page=2&stock=25"
+
+      respGetById:
+        type: object
+        properties:
+          status:
+            type: integer
+            description: codigo 200
+            example: 200
+          message:
+            type: object
+            properties:
+              system:
+                type: string
+                description: success
+              custom:
+                type: string
+                description: ""
+          data:
+            type: object
+            properties:
+              title:
+                type: string
+                description: titulo del producto insertado
+              description:
+                type: string
+                description: descripción del producto insertado
+              price:
+                type: number
+                description: precio del producto insertado
+              img:
+                type: array
+                description: array de imagenes del producto insertado
+              code:
+                type: string
+                description: codigo del producto insertado
+              stock:
+                type: integer
+                description: cantidad del producto insertado
+                minimum: 0
+              category:
+                type: string
+                description: categoria del producto insertado
+              status:
+                type: boolean
+                description: status del producto insertado
+              faker:
+                type: boolean
+                description: indica si el producto es de testing
+              owner:
+                type: ObjectId
+                description: id del dueño del producto insertado
+              _id:
+                type: ObjectId
+                description: id del producto insertado
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            title: Refresco de uva
+            description: Refresco de uva con un sabor dulce y refrescante.
+            price: 1.99
+            img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+            code: "Refrescos1007"
+            stock: 45
+            category: "Refrescos"
+            status: true
+            faker: false
+            owner: "66c3d25674106f92f9b8f8b7"
+            _id: "66d4b785ffeb8dd190d446c5"
+
+    #allProducts:
+
+    HttpStatus:
+      500:
+        type: object
+        properties:
+          status:
+            type: integer
+            description: server error code
+            example: 500
+          message:
+            type: object
+            properties:
+              system:
+                type: string
+                description: system origen error
+              custom:
+                type: string
+                description: descripción personalizada del error.
+            example:
+              system: Internal Server Error
+              custom: 'Error: MongoServerError: E11000 duplicate key error collection: ecommerce.products index: code_1 dup key: { code: \"Refrescos1005\" }'
+      404:
+        type: object
+        properties:
+          status:
+            type: integer
+            description: not found error code
+            example: 404
+          message:
+            type: object
+            properties:
+              system:
+                type: string
+                description: system origen error
+              custom:
+                type: string
+                description: descripción personalizada del error.
+            example:
+              system: Not found
+              custom: "product not found"
+      403:
+        type: object
+        properties:
+          status:
+            type: integer
+            description: forbidden error code
+            example: 403
+          message:
+            type: object
+            properties:
+              system:
+                type: string
+                description: system origen error
+              custom:
+                type: string
+                description: descripción personalizada del error.
+            example:
+              system: Not found
+              custom: "Verify the Id Product length"
+      401:
+        type: object
+        properties:
+          status:
+            type: integer
+            description: Unauthorized error code
+            example: 401
+          message:
+            type: object
+            properties:
+              system:
+                type: string
+                description: system origen error
+              custom:
+                type: string
+                description: descripción personalizada del error.
+            example:
+              system: Unauthorized
+              custom: "you cant remove another owner product"
+
+    Users:
+      respLogin:
+        type: object
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            cookie:
+              originalMaxAge: 360000
+              expires: "2024-09-01T20:43:43.654Z"
+              httpOnly: true
+              path: "/"
+            passport:
+              user: 66c3d25674106f92f9b8f8b7
+            message:
+              first_name: "Juan Pablo 3"
+              last_name: "Sarobe"
+              email: "jp.sarobe@gmail.com"
+              age: 43
+              role: "premium"
+              cart:
+                _id: "66c3d25674106f92f9b8f8b5"
+                products:
+                  - title: Refresco de uva
+                    description: Refresco de uva con un sabor dulce y refrescante.
+                    price: 1.99
+                    img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+                    code: "Refrescos1007"
+                    stock: 45
+                    category: "Refrescos"
+                    status: true
+                    faker: false
+                    owner: "66c3d25674106f92f9b8f8b7"
+                    _id: "66d4b785ffeb8dd190d446c5"
+                  - title: Cerveza lager
+                    description: Cerveza ligera
+                    price: 1.99
+                    img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+                    code: "cerveza1001"
+                    stock: 40
+                    category: "Cervezas"
+                    status: true
+                    faker: false
+                    owner: "66c3d25674106f92f9b8f8b7"
+                    _id: "66d4b785ffeb8dd190d446c5"
+            info:
+              loggedIn: true
+              contador: 1
+            emailType: login
+      respRegister:
+        type: object
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            first_name: "Juan Pablo 3"
+            last_name: "Sarobe"
+            email: "jp.sarobe@gmail.com"
+            age: 43
+            role: "premium"
+            cart:
+              _id: "66c3d25674106f92f9b8f8b5"
+              products: []
+      respPremium:
+        type: object
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            _id: 66c3d25674106f92f9b8f8b7
+            first_name: "Juan Pablo 3"
+            last_name: "Sarobe"
+            email: "jp.sarobe@gmail.com"
+            age: 43
+            password: $2b$10$j.ZslNs4I5.2txT2oNr8hu.aWjPuvXYTQRPtbECxtFbRoAecUdas
+            role: "premium"
+            isGithub: false
+            cart: 66c3d25674106f92f9b8f8b5
+            __V: 0
+    Tickets:
+      findUserTickets:
+        type: object
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            - _id:
+              code: "a9a24e6c-77b1-48f6-b400-2b10b3a01fc4"
+              purchase_datetime: "29/7/2024, 8:40:46 p.m."
+              amount: 18.19
+              purchaser: "pp2@mail.com"
+              products:
+                - product:
+                    title: Refresco de uva
+                    description: Refresco de uva con un sabor dulce y refrescante.
+                    price: 1.99
+                    img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+                    code: "Refrescos1007"
+                    stock: 45
+                    category: "Refrescos"
+                    status: true
+                    faker: false
+                    owner: "66c3d25674106f92f9b8f8b7"
+                    _id: "66d4b785ffeb8dd190d446c5"
+                  quantity: 8
+                  price: 1.99
+                  subtotal: 15.92
+                - product:
+                    title: Cerveza lager
+                    description: Cerveza ligera
+                    price: 1.99
+                    img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+                    code: "cerveza1001"
+                    stock: 40
+                    category: "Cervezas"
+                    status: true
+                    faker: false
+                    owner: "66c3d25674106f92f9b8f8b7"
+                    _id: "66d4b785ffeb8dd190d446c5"
+                  quantity: 2
+                  price: 1.99
+                  subtotal: 2.98
+      createTicket:
+        type: object
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            _id: "66d4fb7ef178dfc68f259f85"
+            code: "a9a24e6c-77b1-48f6-b400-2b10b3a01fc4"
+            purchase_datetime: "29/7/2024, 8:40:46 p.m."
+            amount: 18.19
+            purchaser: "pp2@mail.com"
+            products:
+              - product:
+                  title: Refresco de uva
+                  description: Refresco de uva con un sabor dulce y refrescante.
+                  price: 1.99
+                  img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+                  code: "Refrescos1007"
+                  stock: 45
+                  category: "Refrescos"
+                  status: true
+                  faker: false
+                  owner: "66c3d25674106f92f9b8f8b7"
+                  _id: "66d4b785ffeb8dd190d446c5"
+                quantity: 8
+                price: 1.99
+                subtotal: 15.92
+              - product:
+                  title: Cerveza lager
+                  description: Cerveza ligera
+                  price: 1.99
+                  img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+                  code: "cerveza1001"
+                  stock: 40
+                  category: "Cervezas"
+                  status: true
+                  faker: false
+                  owner: "66c3d25674106f92f9b8f8b7"
+                  _id: "66d4b785ffeb8dd190d446c5"
+                quantity: 2
+                price: 1.99
+                subtotal: 2.98
+            userId: "66c3d25674106f92f9b8f8b7"
+            __v: 0
+    Carts:
+      getAllCarts:
+        type: object
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            - _id: 665e58ba5fba60e0f84dd58c
+              products: []
+              __v: 0
+            - _id: 665fae88906415eabd642684
+              products:
+                - product:
+                    faker: false
+                    _id: 6657b99389a520047697453d
+                    title: Sidra
+                    description: Sidra refrescante, perfecta para celebraciones.
+                    price: 6.99
+                    img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104693/BOTELLA-2_06d65695-b6aa-47c7-947e-c08083799f92_ojv5ow.jpg']"
+                    code: cervezas1002
+                    stock: 29
+                    category: Cervezas
+                    status: true
+                    __v: 0
+                    owner: 66a6b94325975b3f1d4efc9c
+                  quantity: 15
+      getCart:
+        type: object
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            _id: 66c3d25674106f92f9b8f8b5
+            products:
+              - product:
+                  title: Refresco de uva
+                  description: Refresco de uva con un sabor dulce y refrescante.
+                  price: 1.99
+                  img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+                  code: "Refrescos1007"
+                  stock: 45
+                  category: "Refrescos"
+                  status: true
+                  faker: false
+                  owner: "66c3d25674106f92f9b8f8b7"
+                  _id: "66d4b785ffeb8dd190d446c5"
+                quantity: 8
+              - product:
+                  title: Cerveza lager
+                  description: Cerveza ligera
+                  price: 1.99
+                  img: "['https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104891/7135S3EOy7L._AC_UF894_1000_QL80__ptojip.jpg']"
+                  code: "cerveza1001"
+                  stock: 40
+                  category: "Cervezas"
+                  status: true
+                  faker: false
+                  owner: "66c3d25674106f92f9b8f8b7"
+                  _id: "66d4b785ffeb8dd190d446c5"
+                quantity: 2
+      resPutProductCart:
+        type: object
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            _id: 66c3d25674106f92f9b8f8b5
+            products:
+              - product: 66d4b785ffeb8dd190d446c5
+                quantity: 8
+              - product: 6657b9b689a5200476974541
+                quantity: 1
+      resDeleteProductCart:
+        type: object
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            acknowledged: true
+            modifiedCount: 1
+            upsertedId: null
+            upsertedCount: 0
+            matchedCount: 1
+      resCleanCart:
+        type: object
+        example:
+          status: 200
+          message:
+            system: success
+            custom: ""
+          data:
+            _id: 66c3f3c82ec5df53bc75cfb4
+            products: []
+            __v: 0

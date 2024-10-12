@@ -1,0 +1,145 @@
+[
+  {
+    "id": "862ce6ca-95f6-4cc2-8120-f4b511949c75",
+    "title": "Cerveza IPA",
+    "description": "Cerveza India Pale Ale, ligeramente amarga y aromática.",
+    "price": 10.15,
+    "img": [
+      "https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104302/descarga_schjmg.jpg"
+    ],
+    "code": "cervezas1001",
+    "stock": 21,
+    "category": "Cervezas",
+    "status": true
+  },
+  {
+    "id": "8fe66e8b-4fb0-4ed8-b2cc-1cf13fe58e8a",
+    "title": "Vino Tinto Reserva",
+    "description": "Vino tinto reserva de alta calidad, cosecha 2015.",
+    "price": 12.99,
+    "img": [
+      "https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104434/CeYiCOGWSUuyzWD_JuDsOg_ytj20a.jpg"
+    ],
+    "code": "vino1001",
+    "stock": 30,
+    "category": "Vinos",
+    "status": true
+  },
+  {
+    "id": "029502d8-de74-4690-bed6-765955b1761c",
+    "title": "Whisky Escocés",
+    "description": "Whisky escocés de malta, suave y ahumado.",
+    "price": 29.99,
+    "img": [
+      "https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104567/Jack-Daniels-Master-Distiller-N4-550x550_qvvkp4.png"
+    ],
+    "code": "licores1001",
+    "stock": 0,
+    "category": "Licores",
+    "status": true
+  },
+  {
+    "id": "5b96ff71-d7be-4c68-a5ce-c48c8c6b813e",
+    "title": "Ron Añejo",
+    "description": "Ron añejo de 7",
+    "price": 9.99,
+    "img": [
+      "https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104541/ron-havana-club-7-anos_s9mxc4.png"
+    ],
+    "code": "licores1002",
+    "stock": 25,
+    "category": "Licores",
+    "status": true
+  },
+  {
+    "id": "d41e1a79-57f2-4382-8252-be4cf5c3e06d",
+    "title": "Ginebra Premium",
+    "description": "Ginebra premium con una mezcla de botánicos.",
+    "price": 24.99,
+    "img": [
+      "https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104611/ventozelo-gin_tbmgg4.png"
+    ],
+    "code": "licores1003",
+    "stock": 15,
+    "category": "Licores",
+    "status": true
+  },
+  {
+    "id": "7db798dc-b20b-40ae-823d-05924dc615a0",
+    "title": "Soda Limón",
+    "description": "Soda de limón refrescante, ideal para mezclar con licores.",
+    "price": 1.49,
+    "img": [
+      "https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104654/61F7Y3rOWCL._AC_UF894_1000_QL80__xsimls.jpg"
+    ],
+    "code": "refrescos1001",
+    "stock": 50,
+    "category": "Refrescos",
+    "status": true
+  },
+  {
+    "id": "89c82fe6-712d-43a7-a537-ba1992bb2577",
+    "title": "Sidra",
+    "description": "Sidra refrescante, perfecta para celebraciones.",
+    "price": 6.99,
+    "img": [
+      "https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104693/BOTELLA-2_06d65695-b6aa-47c7-947e-c08083799f92_ojv5ow.jpg"
+    ],
+    "code": "cervezas1002",
+    "stock": 35,
+    "category": "Cervezas",
+    "status": true
+  },
+  {
+    "id": "bcd0381c-ffee-4dd4-8535-9373c1515fd4",
+    "title": "Tequila Reposado",
+    "description": "Tequila reposado en barricas de roble, suave y elegante.",
+    "price": 27.99,
+    "img": [
+      "https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696105346/don-julio-reposado-web_xk0eft.png"
+    ],
+    "code": "licores1004",
+    "stock": 15,
+    "category": "Licores",
+    "status": true
+  },
+  {
+    "id": "e6db1a25-bcf9-485d-8c73-82b7bbf8929c",
+    "title": "Té de Manzanilla",
+    "description": "Té de manzanilla calmante, perfecto para relajarse.",
+    "price": 2.29,
+    "img": [
+      "https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104790/41K9uMEPj8L._AC_UF894_1000_QL80__jugepp.jpg"
+    ],
+    "code": "tes1001",
+    "stock": 30,
+    "category": "Tés",
+    "status": true
+  },
+  {
+    "id": "49930a78-e104-47c1-99e1-6239aefaf2ab",
+    "title": "Cerveza Lager",
+    "description": "Cerveza Lager suave y refrescante, perfecta para cualquier ocasión.",
+    "price": 4.99,
+    "img": [
+      "https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104824/61uqEd22CxL._AC_UF1000_1000_QL80__xdft24.jpg"
+    ],
+    "code": "cervezas1003",
+    "stock": 60,
+    "category": "Cervezas",
+    "status": true
+  },
+  {
+    "id": "1f18a83d-56b8-4233-a5cf-7e2b90b86592",
+    "title": "Ginebra de Bayas",
+    "description": "Ginebra con infusiones de bayas silvestres, exquisitamente aromática.",
+    "price": 23.99,
+    "img": [
+      "https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104859/page_1_thumb_large_zizdmd.jpg"
+    ],
+    "code": "licores1005",
+    "stock": 15,
+    "category": "Licores",
+    "status": true
+  }
+]

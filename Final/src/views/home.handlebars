@@ -1,0 +1,21 @@
+<h2>Desafío clase 10 </h2>
+
+<h3> Lista de productos</h3>
+
+{{#each productos}}
+  <div
+    style="display: flex; flex-direction: row; background-color: white; border-radius: 10px 10px; margin: 4px;  "
+  >
+
+    <img src={{img}} style="width: 150px; border-radius: 10px;" />
+    <div style="padding: 5px; margin-left: 15px;">
+
+      <h4>{{title}}</h4>
+      <h4>{{description}}</h4>
+      <h4>Precio: ${{price}}</h4>
+      <h4>Stock: {{stock}} u.</h4>
+
+    </div>
+  </div>
+
+{{/each}}

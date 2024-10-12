@@ -1,0 +1,51 @@
+<h1>PROFILE</h1>
+
+<h2>Bienvenido</h2>
+<h4>Nombre: {{user.first_name}}</h4>
+{{#unless user.isGithub}}
+  <h4>apellido: {{user.last_name}}</h4>
+{{/unless}}
+<h4>email: {{user.email}}</h4>
+{{#unless user.isGithub}}
+  <h4>edad: {{user.age}}</h4>
+{{/unless}}
+<h4>rol: {{user.role}}</h4>
+{{#if user.isGithub}}
+  <h4>Github Profile</h4>
+{{/if}}
+
+<h3> Carrito</h3>
+
+{{#each productos}}
+  <div
+    style="display: flex; flex-direction: row; background-color: white; border-radius: 10px 10px; margin: 4px;  "
+  >
+
+    <img src={{img}} style="width: 150px; border-radius: 10px;" />
+    <div style="padding: 5px; margin-left: 15px;">
+
+      <h4>{{title}}</h4>
+      <h4>{{description}}</h4>
+      <h4>Precio: ${{price}}</h4>
+
+    </div>
+    <div style="padding: 5px; margin-left: 40px;">
+      <h4>Cantidad: {{quantity}} u.</h4>
+      <h2>Subtotal: ${{subtotal}} </h2>
+
+    </div>
+  </div>
+
+{{/each}}
+<div>
+  <h2>TOTAL: ${{total}} </h2>
+</div>
+
+<button
+  class="btnMove"
+  onclick="location.href='/api/vistas/products?limit=3&page=1'"
+>go to products</button>
+
+<form action="/api/user/logout" method="get">
+  <input class="btnLogout" type="submit" value="Logout" />
+</form>

@@ -1,0 +1,80 @@
+paths:
+  /ticket/:
+    get:
+      tags:
+        - Tickets
+      summary: Busca tickets del usuario
+      description: Trae todos los tickets que haya comprado el usuario. Debe estar logueado.
+      responses:
+        200:
+          description: Get tickets sucesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tickets/findUserTickets"
+        403:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+        500:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/500"
+  /ticket/purchase/:
+    post:
+      tags:
+        - Tickets
+      summary: Genera el ticket de compra
+      description: Genere el ticket de compra con los datos que haya el el carrito del usuario. el carrito no puede estar vacio. Debe estar logueado.
+      responses:
+        200:
+          description: genera El ticket de compra correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tickets/createTicket"
+        403:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+        404:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                404:
+                  type: object
+                example:
+                  status: 404
+                  message:
+                    system: not found
+                    custom: "empty cart"
+                  data:
+                    _id: 66c3d25674106f92f9b8f8b5
+                    products:
+                      -
+                    __v: 0
+        500:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/500"

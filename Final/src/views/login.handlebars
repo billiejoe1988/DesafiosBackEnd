@@ -1,0 +1,15 @@
+<h1>LOGIN</h1>
+
+<form action="/api/user/login" method="post">
+  Email<input type="text" name="email" id="" required />
+  Password<input type="password" name="password" id="" required />
+  <input class="btnLogin" type="submit" value="LOGIN" />
+</form>
+<h3> {{error}} </h3>
+<button
+  class="btnGithub"
+  onclick="location.href='/api/user/register-github'"
+>Login whit Github</button>
+<h2>NEW USER?</h2>
+<button class="btnMove" onclick="location.href='/api/vistas/register'">GO
+  REGISTER</button>

@@ -1,0 +1,268 @@
+paths:
+  /products/:
+    post:
+      tags:
+        - Products
+      summary: Inserta un nuevo producto. Debe ser usuario Premium o admin y estar logueado
+      description: Para insertar un producto debe ser premium, para ser premium, debe subir 3 documentos con multer. Como estamos utilizando una version gratuita de Render, no podemos subir archivos, por lo cual para hacer las pruebas se puede usar el usuario jpsarobe@gmail.com password 1234, en caso de querer probarlo con un nuevo usuario, se debe ejecutar la API de forma local.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Products/reqCreate"
+        required: true
+      responses:
+        200:
+          description: product success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products/respCreate"
+        403:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/403"
+        500:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/500"
+    get:
+      tags:
+        - Products
+      summary: busca todos los productos, permite paginado y filtrado
+      parameters:
+        - name: title
+          in: query
+          description: titulo del producto (completo o parcial) por la que filtrar
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: limite de productos por pagina
+          required: false
+          explode: true
+          schema:
+            type: integer
+            minimum: 1
+        - name: page
+          in: query
+          description: pagina de la que se muestran los resultados luego de la paginacion
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: sort
+          in: query
+          description: orden ascendente o descendente por titulo de los productos encontrados
+          required: false
+          explode: true
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+      responses:
+        200:
+          description: product success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products/respGetProducts"
+        403:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/403"
+        500:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/500"
+
+  /products/cat:
+    get:
+      tags:
+        - Products
+      summary: busca y filtra todos los productos por categoria
+      parameters:
+        - name: category
+          in: query
+          description: categoria (completa o parcial) por la que filtrar
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: limite de productos por pagina
+          required: false
+          explode: true
+          schema:
+            type: integer
+            minimum: 1
+        - name: page
+          in: query
+          description: pagina de la que se muestran los resultados luego de la paginacion
+          required: false
+          explode: true
+          schema:
+            type: integer
+        - name: stock
+          in: query
+          description: cantidad minima que tiene el producto en su stock al filtrar
+          required: false
+          explode: true
+          schema:
+            type: integer
+
+      responses:
+        200:
+          description: product success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products/respGetByCategory"
+        403:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/403"
+        500:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/500"
+  /products/{pid}:
+    get:
+      tags:
+        - Products
+      summary: busca el producto por id de producto
+      parameters:
+        - name: pid
+          in: path
+          description: categoria (completa o parcial) por la que filtrar
+          required: false
+          explode: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: product success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products/respGetById"
+        404:
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/404"
+        403:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/403"
+        500:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/500"
+    patch:
+      tags:
+        - Products
+      summary: actualiza producto
+      description: Actualiza los datos del producto recibido por params. Solo actualiza productos cuyo owner sea el usuario logueado. El admin puede actualizar cualquier producto. Recibe el producto completo o solo un campo del mismo.
+      parameters:
+        - name: pid
+          in: path
+          description: Id de producto a actualizar
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Products/reqUpdate"
+        required: true
+      responses:
+        200:
+          description: product success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products/respGetById"
+        404:
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/404"
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/401"
+        500:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/500"
+    delete:
+      tags:
+        - Products
+      summary: Eliminar producto
+      description: Eliminar los datos del producto recibido por params. Solo Elimina productos cuyo owner sea el usuario logueado. El admin puede Eliminar cualquier producto.
+      parameters:
+        - name: pid
+          in: path
+          description: Id del producto a eliminar
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Delete product success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products/respGetById"
+        404:
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/404"
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/401"
+        403:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/403"
+        500:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/500"

@@ -1,0 +1,5 @@
+node_modules
+mongodInstrucciones.txt
+.env
+src/public/images/**/*.jpg
+src/public/images/**/*.png

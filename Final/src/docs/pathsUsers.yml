@@ -1,0 +1,528 @@
+paths:
+  /user/login:
+    post:
+      tags:
+        - Users
+      summary: Login de usuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Users/login"
+        required: true
+      responses:
+        400:
+          description: "Error: Bad Request"
+          content:
+            text/plain:
+              schema:
+                400:
+                  type: string
+                example: Bad Request
+
+        401:
+          description: Unautorized - Usuario o password incorrectos
+
+        200:
+          description: Usuario logueado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users/respLogin"
+
+  /user/register:
+    post:
+      tags:
+        - Users
+      summary: Register de usuario
+      description: formulario de registro de usuario nuevo.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Users/register"
+        required: true
+      responses:
+        401:
+          description: Unautorized - Usuario o password incorrectos
+        200:
+          description: Usuario creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users/respRegister"
+  /user/logout:
+    get:
+      tags:
+        - Users
+      summary: Cierre de sesión
+      description: endpoint para cerrar la sesión de usuario. Debe estar logueado.
+      responses:
+        200:
+          description: session cerrada correctamente
+          content:
+            application/json:
+              schema:
+                success:
+                  type: object
+                example:
+                  status: 200
+                  message:
+                    system: success
+                    custom: "session cerrada correctamente"
+        403:
+          description: no hay sesion activa - attempted access without registration
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+                  error: attempted access without registration
+  /user/premium:
+    patch:
+      tags:
+        - Users
+      summary: define usuario premium
+      description: endpoint para cambiar el rol de user a premium y viceversa. Debe estar logueado.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users/respPremium"
+        403:
+          description: no hay sesion activa - attempted access without registration
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+        401:
+          description: You need upload all de documents for be an Premium user
+          content:
+            application/json:
+              schema:
+                401:
+                  type: object
+                example:
+                  status: 401
+                  message:
+                    system: Unauthorized
+                    custom: "You need upload all de documents for be an Premium user"
+
+  /user/update-password:
+    patch:
+      tags:
+        - Users
+      summary: actualiza password
+      description: endpoint para actualizar el password luego de recibir el link por mail. Debe estar logueado.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Users/resetPassword"
+        required: true
+      responses:
+        200:
+          description: session cerrada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users/respPremium"
+        403:
+          description: no hay sesion activa - attempted access without registration
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: ""
+                  error: Token expires, get a new token
+        401:
+          content:
+            application/json:
+              schema:
+                401:
+                  type: object
+                example:
+                  status: 401
+                  message:
+                    system: forbidden
+                    custom: ""
+                  error: you can not repeat a password
+  /user/update-user:
+    patch:
+      tags:
+        - Users
+      summary: actualiza datos de usuario
+      description: endpoint para actualizar los datos de usuario, solo recibe el nombre apellido y edad. Debe estar logueado.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Users/updateUser"
+        required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users/respPremium"
+        403:
+          description: no hay sesion activa - attempted access without registration
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: ""
+                  error: Token expires, get a new token
+  /user/send-reset-mail:
+    get:
+      tags:
+        - Users
+      summary: envia mail para actualizar password
+      description: endpoint para disparar el mail que tendra el link para actualizar el password. Debe estar logueado.
+      responses:
+        200:
+          description: mail de reset password enviado
+          content:
+            application/json:
+              schema:
+                success:
+                  type: object
+                example:
+                  status: 200
+                  message:
+                    system: success
+                    custom: ""
+                  data: "cookie generada"
+        403:
+          description: no hay sesion activa - attempted access without registration
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+  /user/profile:
+    post:
+      tags:
+        - Users
+      summary: subir foto de perfil
+      description: endpoint para subir imagen de perfil. Debe estar logueado.
+
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                profile:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: imagen de perfil enviado
+          content:
+            application/json:
+              schema:
+                success:
+                  type: object
+                example:
+                  status: 200
+                  message:
+                    system: success
+                    custom: "Profile Image uploaded"
+                  data:
+                    - type: profile
+                      name: "jp.sarobe9@gmail.com-77f164ac.FotoPatente.183216.jpg"
+                      reference: "/Users/juanpablosarobe/Documents/sarobe_Backend_61035/src/public/images/profile/jp.sarobe9@gmail.com-77f164ac.FotoPatente.183216.jpg"
+
+        403:
+          description: no hay sesion activa - attempted access without registration
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+
+  /user/products:
+    post:
+      tags:
+        - Users
+      summary: subir imagen de products
+      description: endpoint para subir imagen de productos. Debe estar logueado.
+
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                products:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: imagen de products enviado
+          content:
+            application/json:
+              schema:
+                success:
+                  type: object
+                example:
+                  status: 200
+                  message:
+                    system: success
+                    custom: "Products Image uploaded"
+                  data:
+                    - type: products
+                      name: "jp.sarobe9@gmail.com-77f164ac.FotoPatente.183216.jpg"
+                      reference: "/Users/juanpablosarobe/Documents/sarobe_Backend_61035/src/public/images/profile/jp.sarobe9@gmail.com-77f164ac.FotoPatente.183216.jpg"
+
+        403:
+          description: no hay sesion activa - attempted access without registration
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+  /user/documents:
+    post:
+      tags:
+        - Users
+      summary: subir documento
+      description: endpoint para subir documento. Debe estar logueado.
+
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                documents:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: documento enviado
+          content:
+            application/json:
+              schema:
+                success:
+                  type: object
+                example:
+                  status: 200
+                  message:
+                    system: success
+                    custom: "documents Image uploaded"
+                  data:
+                    - type: profile
+                      name: "jp.sarobe9@gmail.com-77f164ac.FotoPatente.183216.jpg"
+                      reference: "/Users/juanpablosarobe/Documents/sarobe_Backend_61035/src/public/images/profile/jp.sarobe9@gmail.com-77f164ac.FotoPatente.183216.jpg"
+                    - type: documents
+                      name: "jp.sarobe9@gmail.com-77f164ac.FotoPatente.183216.jpg"
+                      reference: "/Users/juanpablosarobe/Documents/sarobe_Backend_61035/src/public/images/documents/jp.sarobe9@gmail.com-77f164ac.FotoPatente.183216.jpg"
+
+        403:
+          description: no hay sesion activa - attempted access without registration
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+  /user/:
+    get:
+      tags:
+        - Users
+      summary: Obtener todos los usuarios
+      description: endpoint para obtener todos los usuarios, solo muestra datos principales. Debe estar logueado como administrador.
+      responses:
+        200:
+          description: Datos de usuarios obtenidos
+          content:
+            application/json:
+              schema:
+                success:
+                  type: object
+                example:
+                  status: 200
+                  message:
+                    system: success
+                    custom: "documents Image uploaded"
+                  data:
+                    - first_name: Juan Pablo
+                      last_name: "Sarobe"
+                      email: "jp.sarobe@gmail.com"
+                      role: "user"
+                      last_connection: "2024-09-22T20:42:38.670Z"
+                    - first_name: Mario
+                      last_name: Perez
+                      email: mperes@gmail.com
+                      role: "premium"
+                      last_connection: "2024-09-22T20:37:36.148Z"
+        403:
+          description: no hay sesion activa - attempted access without registration
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                401:
+                  type: object
+                example:
+                  status: 401
+                  message:
+                    system: Unauthorized
+                    custom: "administrator role only"
+  /user/set_inactive:
+    get:
+      tags:
+        - Users
+      summary: Pasa a inactivos todos los usuarios sin actividad
+      description: endpoint para Marcar como inactivos a todos los usuarios que no tuvieron actividad en las ultimas 48hs. Debe estar logueado como administrador.
+      responses:
+        200:
+          description: Datos de usuarios obtenidos
+          content:
+            application/json:
+              schema:
+                success:
+                  type: object
+                example:
+                  status: 200
+                  message:
+                    system: success
+                    custom:
+                      - jp.sarobe@gmail.com
+                      - jp.sarobe12@gmail.com
+                      - jp.sarobe13@gmail.com
+                  data: completing inactive users
+
+        403:
+          description: no hay sesion activa - attempted access without registration
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                401:
+                  type: object
+                example:
+                  status: 401
+                  message:
+                    system: Unauthorized
+                    custom: "administrator role only"
+  /user/set_active:
+    post:
+      tags:
+        - Users
+      summary: Pasa a Activos los usuarios inactivos
+      description: endpoint para Marcar como activo al usuario cuyo email es pasado por body. Debe estar logueado como administrador.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Users/set_active"
+      responses:
+        200:
+          description: Datos de usuarios obtenidos
+          content:
+            application/json:
+              schema:
+                success:
+                  type: object
+                example:
+                  status: 200
+                  message:
+                    system: success
+                    custom:
+                      first_name: "Juan Pablo13"
+                      last_name: "Sarobe"
+                      email: "jp.sarobe13@gmail.com"
+                      role: "user"
+                      last_connection: "2024-09-25T01:48:35.852Z"
+                  data: User reactivated
+
+        403:
+          description: no hay sesion activa - attempted access without registration
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                401:
+                  type: object
+                example:
+                  status: 401
+                  message:
+                    system: Unauthorized
+                    custom: "administrator role only"

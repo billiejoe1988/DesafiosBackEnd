@@ -1,0 +1,12 @@
+<h1>REGISTER USER</h1>
+
+<form action="/api/user/register" method="post">
+  Firstname<input type="text" name="first_name" id="" required />
+  Lastname<input type="text" name="last_name" id="" required />
+  Email<input type="text" name="email" id="" required />
+  Age<input type="number" name="age" id="" required />
+  Password<input type="password" name="password" id="" required />
+  <input class="btnLogin" type="submit" value="REGISTER" />
+</form>
+<h3> {{user}} </h3>
+<button class="btnMove" onclick="location.href='/api/vistas'">GO Login</button>

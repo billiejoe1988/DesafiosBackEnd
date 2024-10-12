@@ -1,0 +1,209 @@
+paths:
+  /carts/:
+    get:
+      tags:
+        - Carts
+      summary: Devuelve todos los carritos
+      description: Devuelve todos los carritos creados. Debe estar logueado como admin.
+      responses:
+        200:
+          description: Get carts successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts/getAllCarts"
+        403:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                401:
+                  type: object
+                example:
+                  status: 401
+                  message:
+                    system: Unauthorized
+                    custom: "administrator role only"
+  /carts/userCart:
+    get:
+      tags:
+        - Carts
+      summary: Get cart
+      description: Devuelve el carrito del usuario. Debe estar logueado.
+      responses:
+        200:
+          description: Get User cart successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts/getCart"
+        403:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+  /carts/userCart/products/{pid}:
+    put:
+      tags:
+        - Carts
+      summary: agrega o actualiza un producto en el carrito
+      description: agrega o actualiza un producto en el carrito. Debe estar logueado.
+      parameters:
+        - name: pid
+          in: path
+          description: Id del producto a agregar en el carrito
+          required: true
+          schema:
+            type: string
+          example: 6654fd71af457eac8e6beeb8
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Carts/reqPutProductCart"
+        required: true
+      responses:
+        200:
+          description: product added to cart successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts/resPutProductCart"
+        404:
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/404"
+        403:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                401:
+                  type: object
+                example:
+                  status: 401
+                  message:
+                    system: Unauthorized
+                    custom: "you cant add your own products"
+        500:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/500"
+  /carts/userCart/delete/{pid}:
+    delete:
+      tags:
+        - Carts
+      summary: Elimina un producto del carrito
+      description: Elimina un producto del carrito. Debe estar logueado.
+      parameters:
+        - name: pid
+          in: path
+          description: Id del producto a eliminar del carrito
+          required: true
+          schema:
+            type: string
+          example: 6654fd71af457eac8e6beeb8
+      responses:
+        200:
+          description: product removed from cart successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts/resDeleteProductCart"
+        404:
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/404"
+        403:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+        500:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/500"
+  /carts/userCart/delete/:
+    delete:
+      deprecated: true
+      tags:
+        - Carts
+      summary: Elimina un carrito
+      description: Elimina un carrito completo. Debe estar logueado. Deprecado porque origina incongruencias en la Base de datos.
+  /carts/UserCart/cleanCart:
+    delete:
+      tags:
+        - Carts
+      summary: Vacia el carrito
+      description: Devuelve todos los carritos creados. Debe estar logueado.
+      responses:
+        200:
+          description: product removed from cart successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts/resCleanCart"
+        403:
+          description: forbidden
+          content:
+            application/json:
+              schema:
+                403:
+                  type: object
+                example:
+                  status: 403
+                  message:
+                    system: forbidden
+                    custom: "please login first"
+        500:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HttpStatus/500"

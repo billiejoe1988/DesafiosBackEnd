@@ -1,0 +1,206 @@
+components:
+  schemas:
+    Products:
+      reqCreate:
+        type: object
+        required:
+          - title
+          - description
+          - price
+          - img
+          - code
+          - stock
+          - category
+        properties:
+          title:
+            type: string,
+            description: Nombre del producto
+            example: Cerveza IPA
+          description:
+            type: string,
+            description: Descripción detallada del producto
+            example: Cerveza India Pale Ale, ligeramente amarga y aromática.
+          price:
+            type: number,
+            description: Precio del producto
+            example: 10.15
+          img:
+            type: array,
+            items:
+              type: string
+            description: array que contiene las direcciones de las imagenes del producto.
+            example: "[https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104302/descarga_schjmg.jpg]"
+          code:
+            type: string,
+            description: Codigo interno de referencia
+            example: cervezas1001
+          stock:
+            type: integer,
+            description: cantidad de unidades del producto disponible. debe ser mayor o igual a cero
+            minimum: 0
+            example: 21
+          category:
+            type: string,
+            enum:
+              - Cervezas
+              - Vinos
+              - Licores
+              - Tés
+              - Refrescos
+              - Bebidas sin alcohol
+              - Cócteles listos para beber
+              - Cafés
+              - Combos
+            description: "categoria a la que pertenece el producto. "
+            example: Cervezas
+      reqUpdate:
+        type: object
+        required:
+          - title
+          - description
+          - price
+          - img
+          - code
+          - stock
+          - category
+        properties:
+          title:
+            type: string,
+            description: Nombre del producto
+            example: Cerveza IPA
+          description:
+            type: string,
+            description: Descripción detallada del producto
+            example: Cerveza India Pale Ale, ligeramente amarga y aromática.
+          price:
+            type: number,
+            description: Precio del producto
+            example: 10.15
+          img:
+            type: array,
+            items:
+              type: string
+            description: array que contiene las direcciones de las imagenes del producto.
+            example: "[https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104302/descarga_schjmg.jpg]"
+          code:
+            type: string,
+            description: Codigo interno de referencia
+            example: cervezas1001
+          stock:
+            type: integer,
+            description: cantidad de unidades del producto disponible. debe ser mayor o igual a cero
+            minimum: 0
+            example: 21
+          category:
+            type: string,
+            enum:
+              - Cervezas
+              - Vinos
+              - Licores
+              - Tés
+              - Refrescos
+              - Bebidas sin alcohol
+              - Cócteles listos para beber
+              - Cafés
+              - Combos
+            description: "categoria a la que pertenece el producto. "
+            example: Cervezas
+    Users:
+      login:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            type: string
+            description: email del usuario a loguear
+          password:
+            type: string
+            description: password del usuario
+        example:
+          - email: jp.sarobe2@gmail.com
+            password: "1234"
+          - email: adminCoder@coder.com
+            password: adminCod3r123
+          - email: Se dejan 2 usuarios para tenerlos de referencia. Borrar el que no corresponda, solo enviar un objeto no el array completo.
+      set_active:
+        type: object
+        required:
+          - email
+        properties:
+          email:
+            type: string
+            description: email del usuario a reactivar
+        example:
+          email: jp.sarobe12@gmail.com
+      register:
+        type: object
+        properties:
+          first_name:
+            type: string
+            description: Nombre del usuario
+            example: Juan Pablo
+          last_name:
+            type: string
+            description: Apellido del usuario
+            example: Sarobe
+          email:
+            type: string
+            description: email del usuario
+            example: jp@gmail.com
+          age:
+            type: integer
+            description: edad del usuario
+            example: 21
+          password:
+            type: string
+            description: password del usuario
+            example: 1234
+        required:
+          - first_name
+          - last_name
+          - email
+          - password
+      resetPassword:
+        type: object
+        required: newPassword
+        properties:
+          newPassword:
+            type: string
+            description: nuevo password para actualizar
+            example: "12345"
+      updateUser:
+        type: object
+        properties:
+          first_name:
+            type: string
+            description: nombre a actualizar
+            example: "Juan Carlos"
+          last_name:
+            type: string
+            description: Apellido a actualizar
+            example: "Martinez"
+          age:
+            type: integer
+            description: edad a actualizar
+            example: 31
+      profile:
+        type: object
+        properties:
+          first_name:
+            type: string
+            description: archivo a subir
+            example: "Juan Carlos"
+
+    Carts:
+      reqPutProductCart:
+        type: object
+        required:
+          - quantity
+        properties:
+          quantity:
+            type: string
+            description: cantidad del producto a agregar
+        example:
+          quantity: 5

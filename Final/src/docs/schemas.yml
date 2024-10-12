@@ -1,0 +1,192 @@
+components:
+  schemas:
+    Products:
+      type: object
+      required:
+        - title
+        - description
+        - price
+        - img
+        - code
+        - stock
+        - category
+        - owner
+      properties:
+        title:
+          type: string,
+          description: Nombre del producto
+          example: Cerveza IPA
+        description:
+          type: string,
+          description: Descripción detallada del producto
+          example: Cerveza India Pale Ale, ligeramente amarga y aromática.
+        price:
+          type: number,
+          description: Precio del producto
+          example: 10.15
+        img:
+          type: array,
+          items:
+            type: string
+          description: array que contiene las direcciones de las imagenes del producto.
+          example: "[https://res.cloudinary.com/dg8ndxl2y/image/upload/v1696104302/descarga_schjmg.jpg]"
+        code:
+          type: string,
+          description: Codigo interno de referencia
+          example: cervezas1001
+        stock:
+          type: integer,
+          description: cantidad de unidades del producto disponible. debe ser mayor o igual a cero
+          minimum: 0
+          example: 21
+        category:
+          type: string,
+          enum:
+            - Cervezas
+            - Vinos
+            - Licores
+            - Tés
+            - Refrescos
+            - Bebidas sin alcohol
+            - Cócteles listos para beber
+            - Cafés
+            - Combos
+          description: "categoria a la que pertenece el producto. "
+          example: Cervezas
+        status:
+          type: boolean,
+          description: no obligatorio, indica el status del producto
+          example: true
+        faker:
+          type: boolean,
+          description: indica si un producto es falso y fue creado para fines de testing de desarrollo, no obligatorio, default false
+          example: false
+        owner:
+          type: objectId,
+          description: indica el id del usuario premium que creo el producto y al cual le pertenece.
+          example: ObjectID('66c3d25674106f92f9b8f8b7')
+    Cart:
+      type: object
+      properties:
+        product:
+          type: ObjectId
+          description: indica el id del producto agregado al carrito
+          example: ObjectID('66c3d25674106f92f9b8f8b7')
+        quantity:
+          type: integer
+          description: la cantidad de unidades del producto a comprar
+          example: 1
+          minimum: 1
+      required:
+        - product
+        - quantity
+    HttpStatus:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: error code
+        message:
+          type: object
+          properties:
+            system:
+              type: string
+              description: system origen error
+            custom:
+              type: string
+              description: descripción personalizada del error.
+          example:
+            system: Not found
+            custom: "Verify the Id Product length"
+    Ticket:
+      type: object
+      properties:
+        code:
+          type: string
+          description: codigo interno del ticket de comprar
+          example: 6d94918e-aba6-4ceb-90f6-6dda2a9c05c3
+        purchase_tadetime:
+          type: string
+          description: fecha y hora d ela comprar
+          example: 29/7/2024, 8:27:50 p.m.
+        amount:
+          type: number
+          description: importe total del ticket
+          example: 135.5
+        purchaser:
+          type: string
+          description: email del comprador del producto
+          example: jp@gmail.com
+        userId:
+          type: ObjectId
+          description: user Id del comprador del ticket
+          example: ObjectId('66a6cf638c3de1ac26aa36a6')
+        products:
+          type: object
+          properties:
+            product:
+              type: ObjectId
+              description: indica el id del producto agregado al carrito
+              example: ObjectID('66c3d25674106f92f9b8f8b7')
+            quantity:
+              type: integer
+              description: la cantidad de unidades del producto a comprar
+              example: 1
+              minimum: 1
+            price:
+              type: number
+              description: importe del producto al momento de la compra
+              example: 10.5
+            subtotal:
+              type: number
+              description: subtotal del producto precio * cantidad
+              example: 21.2
+      required:
+        - code
+        - purchase_datetime
+        - amount
+        - purchaser
+        - userId
+        - products
+    User:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: Nombre del usuario
+          example: Juan Pablo
+        last_name:
+          type: string
+          description: Apellido del usuario
+          example: Sarobe
+        email:
+          type: string
+          description: email del usuario
+          example: jp@gmail.com
+        age:
+          type: integer
+          description: edad del usuario
+          example: 21
+        password:
+          type: string
+          description: password hasheado del usuario
+          example: $2b$10$NOZHOEKvN.Iy30YQpvZ1.eOqtBFybTuzdViu.NwqSakTgdc8KNWI2
+        role:
+          type: string
+          description: rol del usuario, puede ser admin, user o premium
+          example: user
+        isGithub:
+          type: boolean
+          description: si es verdadero indica que el usuario fue creado utlizando github como herramienta de validacion de identidad
+          example: false
+        cart:
+          type: ObjectId
+          description: indica el id del carrito correspondiente al usuario creado
+          example: ObjectID('66c3d25674106f92f9b8f8b7')
+      required:
+        - first_name
+        - last_name
+        - email
+        - password
+        - role
+        - cart

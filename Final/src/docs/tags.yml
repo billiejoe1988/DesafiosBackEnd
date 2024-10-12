@@ -1,0 +1,21 @@
+tags:
+  - name: Products
+    description: Endpoints de los productos
+    externalDocs:
+      description: Postman endpoints tests
+      url: https://documenter.getpostman.com/view/11511543/2sA3BuW9A1
+  - name: Carts
+    description: acceso a los datos de los carritos
+    externalDocs:
+      description: Postman endpoints tests
+      url: https://documenter.getpostman.com/view/11511543/2sA3JJ8NeR
+  - name: Tickets
+    description: endpoints para la compra del carrito
+    externalDocs:
+      description: Postman endpoints tests
+      url: https://documenter.getpostman.com/view/11511543/2sA3kbexfH
+  - name: Users
+    description: endpoints para CRUD usuarios
+    externalDocs:
+      description: Postman endpoints tests
+      url: https://documenter.getpostman.com/view/11511543/2sA3kbexfK
