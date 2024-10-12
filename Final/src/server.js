@@ -26,9 +26,9 @@ const products = new ProductsManager();
 const app = express();
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
-//iniciamos el middleware de cookie parser
+
 const SECRET = config.COOKIE_KEY;
-app.use(cookieParser(SECRET)); //con esto queda disponible para utilizar en cualquier parte de la app
+app.use(cookieParser(SECRET)); 
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.json())
@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const SESSIONSECRET = config.SESSION_KEY;
 const connectionString = config.MONGO_URL;
-//para conectarnos a mongo loinicializamos con MongoStore.create y le pasamos los datos de configuracion
+
 const sessionConfig = {
   store: MongoStore.create({
     mongoUrl: connectionString,
@@ -49,24 +49,22 @@ const sessionConfig = {
   saveUninitialized: true,
   resave: true,
 };
-app.use(session(sessionConfig)); //con esto queda disponible para utilizar en cualquier parte de la app.
+app.use(session(sessionConfig)); 
 
-//Fin configuración de session
 
-//iniciamos la librería handlebars, siempre van estas 3 lineas
 app.engine("handlebars", handlebars.engine());
-app.set("views", __dirname + "/views"); //pasamos la carpeta donde va a tomar las vistas
-app.set("view engine", "handlebars"); //pasamos la configuración seteamos el motor de plantillas a utilizar
+app.set("views", __dirname + "/views"); 
+app.set("view engine", "handlebars"); 
 
-//! ANTES DE LAS RUTAS - Inicializamos passport para estrategias de autenticación
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Enrutador
+
 app.get("/", (req, res) =>
-  res.send(`<h1>LiquidStore Backend.</h1>
+  res.send(`<h1>Store</h1>
             <p style="font-size: 16px">
-              Bienvenido, para acceder a la documentación por favor haga clic <a href="https://liquidstore-backend.onrender.com/docs" target="_blank">AQUI</a>.
+              Bienvenido la documentacion esta aqui
             </p>`)
 );
 app.use("/api", mainRouter.getRouter());
