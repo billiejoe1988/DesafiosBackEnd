@@ -71,3 +71,5 @@
 ---
 
 Este proyecto forma parte de un e-commerce desarrollado con el stack MERN (MongoDB, Express.js, React, Node.js), utilizando Vite para la configuración del cliente con React.
+
+Calificacion: 10
